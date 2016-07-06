@@ -1,0 +1,4 @@
+ADDRESS_LINE:=	{Size=1:60} 
+
+Address information that, when combined with NAME and CONTinuation lines, 
+meets requirements for sending communications through the mail.

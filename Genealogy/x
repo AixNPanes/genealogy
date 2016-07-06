@@ -1,0 +1,6 @@
+function XX(a,	i,j,x,X,n)  # make HexDigit-Byte-(zero-filled)-to-Number Array
+{
+print "->" a;
+print "=>" i;
+}
+XX(1);

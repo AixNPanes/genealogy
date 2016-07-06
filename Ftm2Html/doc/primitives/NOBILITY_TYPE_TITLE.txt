@@ -1,0 +1,4 @@
+NOBILITY_TYPE_TITLE:=	{Size=1:120} 
+
+The title given to or used by a person, especially of royalty or other noble 
+class within a locality.

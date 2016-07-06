@@ -1,0 +1,4 @@
+COPYRIGHT_GEDCOM_FILE:=	{Size=1:90} 
+
+A copyright statement needed to protect the copyrights of the submitter of this 
+GEDCOM file.

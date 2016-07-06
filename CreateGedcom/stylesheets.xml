@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<project default="gedcom55-txt">
+	<property name="xsaxon.jar" value="/dev/workspace/libs/saxon6-5-5/saxon.jar" />
+	<property name="saxon.jar" value="C:/EclipseProjects/Genealogy/saxon9/saxon9.jar" />
+	<property name="data.dir" value="data"/>
+	<property name="stylesheets" value="stylesheets" />
+	<property name="gedcom60.xml" value="${data.dir}/gedcom60.xml" />
+	<property name="gedcom55.xml" value="${data.dir}/gedcom55.xml" />
+	<property name="gedcom55.txt" value="${data.dir}/gedcom55.ged" />
+	<property name="Gedcom60_to_Gedcom55xml.xslt" value="${stylesheets}/style/Gedcom60_to_Gedcom55xml.xslt" />
+	<property name="Gedcom55xml_to_Gedcom55txt.xslt" value="${stylesheets}/style/Gedcom55xml_to_Gedcom55txt.xslt" />
+	<property name="gedcomv60.dtd" value="${stylesheets}/schemas/gedcomv60.dtd" />
+	
+
+
+	<target name="gedcom55-xml">
+		<echo message="XSLT Transforming ${gedcom60.xml} to ${gedcom55.xml}..." />
+		<xslt classpath="${saxon.jar}"
+      in="${gedcom60.xml}"
+      out="${gedcom55.xml}"
+      style="${Gedcom60_to_Gedcom55xml.xslt}" >
+			<xmlcatalog>
+				<dtd
+          id="GEDCOMv60.dtd"
+          location="${gedcomv60.dtd}"/>
+			</xmlcatalog>
+		</xslt>
+	</target>
+
+	<target name="gedcom55-txt" depends="gedcom55-xml">
+		<echo message="XSLT Transforming ${gedcom55.xml} to ${gedcom55.txt}..." />
+		<xslt classpath="${saxon.jar}"
+      in="${gedcom55.xml}"
+      out="${gedcom55.txt}"
+      style="${Gedcom55xml_to_Gedcom55txt.xslt}" >
+		</xslt>
+	</target>
+
+	<target name="clean" description="Deletes all the generated artifacts.">
+		<delete failonerror="false">
+			<fileset dir="${data.dir}">
+				<exclude name="**/gedcom60.xml"/>
+			</fileset>
+		</delete>
+	</target>
+
+</project>
+

@@ -1,0 +1,2 @@
+DATE_EXACT:=	{Size=10:11} 
+<DAY> <MONTH> <YEAR_GREG>

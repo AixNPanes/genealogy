@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GEDCOM>
+    <HeaderRec>
+        <FileCreation Time="20:38:08" Date="08 Jan 2008">
+            <Product>
+                <ProductId>createGedcom</ProductId>
+                <Version>1.0</Version>
+                <Name>SourceForge createGedcom</Name>
+                <Supplier>
+                    <Link Target="ContactRec" Ref="CB001">
+                    </Link>
+                </Supplier>
+            </Product>
+            <Copyright>2006</Copyright>
+        </FileCreation>
+        <Submitter>
+            <Link Target="ContactRec" Ref="CB001">
+            </Link>
+        </Submitter>
+    </HeaderRec>
+    <ContactRec Type="business" Id="CB001">
+        <Name>Toccata Software Inc.</Name>
+        <MailAddress>
+            <AddrLine>
+                <PlacePart Type="Street" Level="6">29 Marmaduke St.</PlacePart>
+            </AddrLine>
+            <AddrLine>
+                <PlacePart Type="City" Level="4">Toronto</PlacePart>
+            </AddrLine>
+            <AddrLine>
+                <PlacePart Type="Province" Level="2">Ontario</PlacePart>
+            </AddrLine>
+            <AddrLine>
+                <PlacePart Type="Country" Level="1">Canada</PlacePart>
+            </AddrLine>
+            <AddrLine>
+                <PlacePart Type="PostalCode" Level="5">M6R 1T1</PlacePart>
+            </AddrLine>
+        </MailAddress>
+        <Phone Type="home">416 555 1212</Phone>
+        <Email>ken.stevens@sympatico.ca</Email>
+        <URI>http://www.toccatagames.com/</URI>
+    </ContactRec>
+</GEDCOM>

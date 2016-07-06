@@ -1,0 +1,6 @@
+EVENTS_RECORDED:=	{Size=1:90} 
+[<EVENT_ATTRIBUTE_TYPE> | <EVENTS_RECORDED>, <EVENT_ATTRIBUTE_TYPE>] 
+
+An enumeration of the different kinds of events that were recorded in a 
+particular source. Each enumeration is separated by a comma. Such as a parish 
+register of births, deaths, and marriages would be BIRT, DEAT, MARR.

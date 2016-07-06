@@ -1,0 +1,3 @@
+RELIGIOUS_AFFILIATION:=	{Size=1:90} 
+
+A name of the religion with which this person, event, or record was affiliated.

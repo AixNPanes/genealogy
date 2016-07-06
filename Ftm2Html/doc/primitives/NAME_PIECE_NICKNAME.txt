@@ -1,0 +1,4 @@
+NAME_PIECE_NICKNAME:=	{Size=1:30} 
+[ <NAME_PIECE> | <NAME_PIECE_NICKNAME>, <NAME_PIECE> ] 
+
+A descriptive or familiar name used in connection with one's proper name.

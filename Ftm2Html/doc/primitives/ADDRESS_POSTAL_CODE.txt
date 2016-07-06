@@ -1,0 +1,4 @@
+ADDRESS_POSTAL_CODE:=	{Size=1:10} 
+
+The ZIP or postal code used by the various localities in handling of mail.  
+Isolated for sorting or indexing.

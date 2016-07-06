@@ -1,0 +1,7 @@
+DATE_APPROXIMATED:=	{Size=4:35} 
+[ ABT <DATE> | CAL <DATE> | EST <DATE> ] 
+
+Where:
+ABT = About, meaning the date is not exact.
+CAL = Calculated mathematically, for example, from an event date and age.
+EST = Estimated based on an algorithm using some other event date.

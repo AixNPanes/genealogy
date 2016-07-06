@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="1.0"
+		xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<access>
+		FIELD
+	</access>
+	<named-query name="findAlias">
+		<query>
+			SELECT country from country where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT state from state where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT county from county where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT city from city where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT locale from locale where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT sublocale from sublocale where lower(:name) in (lower(name), lower(alias))
+			UNION 
+			SELECT subsublocale from subsublocale where lower(:name) in (lower(name), lower(alias))
+		</query>
+	</named-query>
+	<mapped-superclass class="ws.daley.genealogy.db.IdNumber">
+		<attributes>
+			<id name="id"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.IdString">
+		<attributes>
+			<id name="idString"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.PlaceName">
+		<attributes>
+			<basic name="name"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.PlaceType">
+		<attributes>
+			<basic name="type">
+				<enumerated>
+					STRING
+				</enumerated>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.PlaceStructure">
+		<attributes>
+			<basic name="abbrev"/>
+			<one-to-many name="aliases" target-entity="ws.daley.genealogy.db.places.PlaceAlias">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="urls" target-entity="ws.daley.genealogy.db.places.URL">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.people.structure.Text"/>
+	<entity class="ws.daley.genealogy.db.places.Header">
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.URL">
+		<attributes>
+			<basic name="url">
+				<lob/>
+			</basic>
+			<basic name="urlType"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.PlaceAlias">
+		<attributes>
+			<basic name="alias"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Country">
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.State">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.County">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.City">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Locale">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.SubLocale">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="locale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.SubSubLocale">
+		<attributes>
+			<one-to-one name="country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="locale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="subLocale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Fixup">
+		<attributes>
+			<id name="name"/>
+			<basic name="fixup"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.UrlType"/>
+	<entity class="ws.daley.genealogy.db.places.Place">
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county" target-entity="ws.daley.genealogy.db.places.County">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city" target-entity="ws.daley.genealogy.db.places.City">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="locale" target-entity="ws.daley.genealogy.db.places.Locale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="subLocale" target-entity="ws.daley.genealogy.db.places.SubLocale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="subSubLocale" target-entity="ws.daley.genealogy.db.places.SubSubLocale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="parent" target-entity="ws.daley.genealogy.db.places.Place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="parentName"/>
+			<transient name="element"/>
+			<transient name="parentElement"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.CountryAlias">
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.StateAlias">
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.CountyAlias">
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Address">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.EMail">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Phone">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Title">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Place">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Repository">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Sex">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.HeaderRecord">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.IndividualRecord">
+		<attributes>
+			<basic name="relationshipToFather"/>
+			<basic name="relationshipToMother"/>
+			<one-to-many name="sex" target-entity="ws.daley.genealogy.db.people.element.Sex">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="name" target-entity="ws.daley.genealogy.db.people.structure.Name">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="occupation" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="militaryService" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ordinance" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ssn" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumber" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="residence" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="title" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="note" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="birth" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="death" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="even" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="burial" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="blessing" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="adoption" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="christening" target-entity="ws.daley.genealogy.db.people.structure.Event">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="husbandInFamily" target-entity="ws.daley.genealogy.db.people.FamilyRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="wifeInFamily" target-entity="ws.daley.genealogy.db.people.FamilyRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<transient name="husbandIdInFamily"/>
+			<transient name="wifeIdInFamily"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.FamilyRecord">
+		<attributes>
+			<one-to-many name="children" target-entity="ws.daley.genealogy.db.people.IndividualRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="marriage" target-entity="ws.daley.genealogy.db.people.structure.Marriage">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="note" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="husband" target-entity="ws.daley.genealogy.db.people.IndividualRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="wife" target-entity="ws.daley.genealogy.db.people.IndividualRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="husbandId"/>
+			<transient name="wifeId"/>
+			<transient name="childrenId"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.NoteRecord">
+		<attributes>
+			<basic name="rin"/>
+			<one-to-one name="sourceCitation" target-entity="ws.daley.genealogy.db.people.structure.SourceCitation">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="changeDate" target-entity="ws.daley.genealogy.db.people.structure.ChangeDate">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="refn" target-entity="ws.daley.genealogy.db.people.structure.Refn">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.TrailerRecord">
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.RepositoryRecord">
+		<attributes>
+			<one-to-many name="name" target-entity="ws.daley.genealogy.db.people.structure.Name">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="address" target-entity="ws.daley.genealogy.db.people.element.Address">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="email" target-entity="ws.daley.genealogy.db.people.element.EMail">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="phone" target-entity="ws.daley.genealogy.db.people.element.Phone">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.SubmitterRecord">
+		<attributes>
+			<basic name="submitter"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.SourceRecord">
+		<attributes>
+			<basic name="rin"/>
+			<one-to-many name="sourceData" target-entity="ws.daley.genealogy.db.people.structure.SourceData">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceOriginator" target-entity="ws.daley.genealogy.db.people.element.SourceOriginator">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceTitle" target-entity="ws.daley.genealogy.db.people.element.SourceTitle">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceFiledBy" target-entity="ws.daley.genealogy.db.people.element.SourceFiledBy">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourcePublication" target-entity="ws.daley.genealogy.db.people.element.SourcePublication">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceText" target-entity="ws.daley.genealogy.db.people.element.SourceText">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceRepositoryCitation" target-entity="ws.daley.genealogy.db.people.structure.SourceRepositoryCitation">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLink" target-entity="ws.daley.genealogy.db.people.structure.MultimediaLink">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="refn" target-entity="ws.daley.genealogy.db.people.structure.Refn">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="changeDate" target-entity="ws.daley.genealogy.db.people.structure.ChangeDate">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.Event">
+		<attributes>
+			<basic name="date"/>
+			<basic name="place"/>
+			<one-to-many name="source" target-entity="ws.daley.genealogy.db.people.structure.Source">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.Source">
+		<attributes>
+			<basic name="note"/>
+			<one-to-one name="title" target-entity="ws.daley.genealogy.db.people.element.Title">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="repository" target-entity="ws.daley.genealogy.db.people.element.Repository">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="data" target-entity="ws.daley.genealogy.db.people.structure.SourceCitationData">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.SourceData">
+		<attributes>
+			<one-to-many name="eventsRecorded" target-entity="ws.daley.genealogy.db.people.structure.EventsRecorded">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="responsibleAgency" target-entity="ws.daley.genealogy.db.people.element.ResponsibleAgency">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.Marriage">
+		<attributes>
+			<basic name="date"/>
+			<basic name="placeId"/>
+			<one-to-many name="sources" target-entity="ws.daley.genealogy.db.people.structure.Source">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.people.element.Place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="sourceId"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.EventsRecorded">
+		<attributes>
+			<one-to-many name="eventsDate" target-entity="ws.daley.genealogy.db.people.element.EventsDate">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="eventsPlace" target-entity="ws.daley.genealogy.db.people.element.EventsPlace">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.RefnType">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.EventsDate">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.EventsPlace">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.ResponsibleAgency">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceOriginator">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceTitle">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceFiledBy">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourcePublication">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceText">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.MultimediaLinkFormat">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.MultimediaLinkTitle">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.MultimediaLinkFile">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.ChangeDateTime">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceCitationDate">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceCitationText">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Page">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.Quay">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.EventRole">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.element.SourceMediaType">
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.SourceRepositoryCitation">
+		<attributes>
+			<basic name="citation"/>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceCallNumber" target-entity="ws.daley.genealogy.db.people.structure.SourceCallNumber">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.SourceCallNumber">
+		<attributes>
+			<one-to-many name="sourceMediaType" target-entity="ws.daley.genealogy.db.people.element.SourceMediaType">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.MultimediaLink">
+		<attributes>
+			<one-to-many name="multimediaLinkFormat" target-entity="ws.daley.genealogy.db.people.element.MultimediaLinkFormat">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLinkTitle" target-entity="ws.daley.genealogy.db.people.element.MultimediaLinkTitle">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLinkFile" target-entity="ws.daley.genealogy.db.people.element.MultimediaLinkFile">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.NoteStructure">
+		<attributes>
+			<one-to-many name="sourceCitation" target-entity="ws.daley.genealogy.db.people.structure.SourceCitation">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.Refn">
+		<attributes>
+			<one-to-many name="refnType" target-entity="ws.daley.genealogy.db.people.element.RefnType">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.ChangeDate">
+		<attributes>
+			<one-to-many name="changeDateDate" target-entity="ws.daley.genealogy.db.people.structure.ChangeDateDate">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.ChangeDateDate">
+		<attributes>
+			<one-to-many name="changeDateTime" target-entity="ws.daley.genealogy.db.people.element.ChangeDateTime">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.SourceCitation">
+		<attributes>
+			<one-to-many name="page" target-entity="ws.daley.genealogy.db.people.element.Page">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="eventCitation" target-entity="ws.daley.genealogy.db.people.structure.EventCitation">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceCitationData" target-entity="ws.daley.genealogy.db.people.structure.SourceCitationData">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="quay" target-entity="ws.daley.genealogy.db.people.element.Quay">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLink" target-entity="ws.daley.genealogy.db.people.structure.MultimediaLink">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructure" target-entity="ws.daley.genealogy.db.people.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.EventCitation">
+		<attributes>
+			<one-to-many name="eventRole" target-entity="ws.daley.genealogy.db.people.element.EventRole">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.SourceCitationData">
+		<attributes>
+			<one-to-many name="sourceCitationDate" target-entity="ws.daley.genealogy.db.people.element.SourceCitationDate">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceCitationText" target-entity="ws.daley.genealogy.db.people.element.SourceCitationText">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.people.structure.Name">
+		<attributes>
+			<one-to-many name="source" target-entity="ws.daley.genealogy.db.people.structure.SourceCitation">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.Gedcom55">
+		<attributes>
+			<id name="id"/>
+			<one-to-many name="families" target-entity="ws.daley.genealogy.db.people.FamilyRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="headers" target-entity="ws.daley.genealogy.db.people.HeaderRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="individuals" target-entity="ws.daley.genealogy.db.people.IndividualRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="notes" target-entity="ws.daley.genealogy.db.people.NoteRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="repositories" target-entity="ws.daley.genealogy.db.people.RepositoryRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sources" target-entity="ws.daley.genealogy.db.people.SourceRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="submitters" target-entity="ws.daley.genealogy.db.people.SubmitterRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="trailers" target-entity="ws.daley.genealogy.db.people.TrailerRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+</entity-mappings>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+
+Provides simple interfaces to main gedcom creation operations.
+
+<h2>Package Specification</h2>
+
+The gedcom package provides a number of wrappers to simplify the creation of
+Gedcom 6.0 elements.  The functionality provided by jaxb out of the box is at
+times cumbersome to use.  Developers are encouraged to only use the gedcom classes
+to create their gedcom files, and if they find a method wanting, they are encouraged
+to add it.  Note that many of the jaxb provided methods, as they are inherited
+by their gedcom subclasses, may be used directly.  For example.
+<PRE>
+
+		// Product
+		Product prod = new Product(); // wrapper from gedcom package
+		prod.setName("SourceForge createGedcom"); // wrapper method
+		prod.setProductId("createGedcom"); // jaxb inherited method
+		prod.setVersion("1.0"); // jaxb inherited method
+
+</PRE>
+
+The other thing the gedcom package provides for is maintaining an in-memory database
+of ContactRec, FamilyRec, GroupRec, IndividualRec, and SourceRec objects.  This
+facility is provided to assist developers in linking objects.  For example, after
+adding all the indivuals to the GEDCOM, you will want to add those individuals to
+families and events.  IndividualRec objects can be retrieved by id from the IndividualRec
+class as follows.
+
+<PRE>
+
+		FamilyRec familyRec = new FamilyRec(fam.getId());
+		EventRec eventRec = new EventRec(fam.getId(), EventRec.VitalType.marriage);
+
+		if (fam.getHusband() != null) {
+			IndividualRec indi = IndividualRec.getRecord(fam.getHusbandId())));
+			familyRec.setHusband(indi);
+			eventRec.addParticipant(indi, EventRec.Role.husband);
+		}
+
+</PRE>
+
+</body>
+</html>

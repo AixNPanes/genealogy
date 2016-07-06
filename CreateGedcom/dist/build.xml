@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<project default="gedcom55-txt">
+	<property name="jaxb.home" value="/dev/workspace/libs/jwsdp/jaxb/lib"/>
+	<property name="data.dir" value="data"/>
+	<property name="gedcom60.xml" value="${data.dir}/gedcom60.xml" />
+	<property name="classes" value="classes" />
+	<property name="src" value="src"/>
+	<property name="gedcom.jar" value="lib/gedcom.jar"/>
+
+	<path id="classpath">
+		<fileset dir="${jaxb.home}" includes="*.jar" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+		<pathelement location="${classes}"/>
+		<pathelement location="${gedcom.jar}"/>
+	</path>
+
+	<target name="build">
+		<mkdir dir="${classes}"/>
+		<echo message="Current working directory: ${basedir}"/>
+		<javac destdir="${classes}" debug="on">
+			<classpath refid="classpath" />
+			<src path="${src}"/>
+		</javac>
+	</target>
+
+	<target name="gedcom60-xml" depends="build">
+		<echo message="Running CreateGedcomExample..." />
+		<mkdir dir="${data.dir}" />
+		<echo message="Current working directory: ${basedir}"/>
+		<java classname="example.CreateGedcomExample">
+			<classpath refid="classpath" />
+			<sysproperty key="output.filename" value="${gedcom60.xml}"/>
+		</java>
+	</target>
+
+	<target name="gedcom55-txt" depends="gedcom60-xml">
+		<ant antfile="stylesheets/build.xml" target="gedcom55-txt"/>
+	</target>
+
+	<target name="clean" description="Deletes all the generated artifacts.">
+		<delete file="${gedcom60.xml}" failonerror="false" />
+	</target>
+</project>

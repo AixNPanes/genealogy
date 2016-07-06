@@ -1,0 +1,8 @@
+YEAR_GREG:=	{Size=3:7} 
+[ <NUMBER> | <NUMBER>/<DIGIT><DIGIT> ] 
+
+The slash "/" <DIGIT><DIGIT> a year modifier which shows the possible date 
+alternatives for pre1752 date brought about by a changing the beginning of 
+the year from MAR to JAN in the English calendar change of 1752, for example, 
+15 APR 1699/00. A (B.C.) appended to the <YEAR> indicates a date before the 
+birth of Christ.

@@ -1,0 +1,16 @@
+SUBMITTER_RECORD:=
+
+n @<XREF:SUBM>@ SUBM													{1:1} 
+	+1 NAME <SUBMITTER_NAME>											{1:1} 
+	+1 <<ADDRESS_STRUCTURE>>											{0:1} 
+	+1 <<MULTIMEDIA_LINK>>												{0:M} 
+	+1 LANG <LANGUAGE_PREFERENCE>										{0:3} 
+	+1 RFN <SUBMITTER_REGISTERED_RFN>									{0:1} 
+	+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+	+1 <<CHANGE_DATE>>													{0:1}
+
+The submitter record identifies an individual or organization that
+contributed information contained in the GEDCOM transmission. All records
+in the transmission are assumed to be submitted by the SUBMITTER referenced
+in the HEADer, unless a SUBMitter reference inside a specific record points at
+a different SUBMITTER record.

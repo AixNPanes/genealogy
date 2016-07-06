@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/openjpa-1.2.1.jar" sourcepath="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1-source/openjpa-persistence/src/main/java"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/geronimo-jta_1.1_spec-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/serp-1.13.1.jar"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/commons-collections-3.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/poi-src-3.5-beta6"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Apache/xerces-bin-2_9_1/xercesImpl.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.1.0 - Helios"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

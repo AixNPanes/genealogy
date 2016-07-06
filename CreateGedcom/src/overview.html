@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+
+Provides for creation of Gedcom 6.0 xml files.  It requires Jaxb 2.0 in order to run.
+Jaxb 2.0 can be obtained as a part of Sun's JWSDP 2.0
+<A href="http://java.sun.com/webservices/jwsdp/">Java Web Services Developer Pack version 2.0</a>.
+To build, edit build.xml and set 'jaxb.home' to the location of the JWSDP jaxb/lib folder
+on your hard drive. 
+
+<h2>Usage</h2>
+
+Use the gedcom package to create GEDCOM 6.0 xml files.  See the CreateGedcomExample.java
+file in the example folder for an example of how to use this library.
+<p>
+Start by instantiating a GEDCOM object,
+then create a HeaderRec and set the Header in the GEDCOM object.  Next, add IndividualRec, FamilyRec,
+SourceRec, EventRec, ContactRec, and GroupRec objects.  Lastly, print the GEDCOM xml
+out to a file using a JAXBContext.
+
+Here is how you print a GEDCOM object using a JAXBContext.
+<PRE>
+	private void print(GEDCOM ged, String filename) throws Exception {
+		JAXBContext jc = JAXBContext.newInstance("jaxb.gedcom");
+
+		// create a Marshaller and marshal to filename
+		Marshaller m = jc.createMarshaller();
+		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		FileOutputStream out = new FileOutputStream(filename);
+		ged.marshal(m, out);
+		out.close();		
+	}
+</PRE>
+
+
+</body>
+</html>

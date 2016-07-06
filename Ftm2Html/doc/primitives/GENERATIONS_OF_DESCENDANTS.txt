@@ -1,0 +1,5 @@
+GENERATIONS_OF_DESCENDANTS:=	{Size=1:4} 
+
+The number of generations of descendants included in this transmission. This 
+value is usually provided when FamilySearch programs build a GEDCOM file for 
+a patron requesting a download of descendants.

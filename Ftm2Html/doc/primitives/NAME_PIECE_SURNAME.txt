@@ -1,0 +1,4 @@
+NAME_PIECE_SURNAME:=	{Size=1:120} 
+[ <NAME_PIECE> | <NAME_PIECE_SURNAME>, <NAME_PIECE> ] 
+
+Surname or family name. Different surnames are separated by a comma.

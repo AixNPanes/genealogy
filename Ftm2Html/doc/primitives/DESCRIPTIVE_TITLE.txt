@@ -1,0 +1,3 @@
+DESCRIPTIVE_TITLE:=	{Size=1:248}  
+
+The title of a work, record, item, or object.

@@ -1,0 +1,4 @@
+DATE_HEBR:=	{Size=4:35} 
+[ <YEAR> | <MONTH_HEBR> <YEAR> |  <DAY> <MONTH_HEBR> <YEAR> ]
+
+See <MONTH_HEBR>

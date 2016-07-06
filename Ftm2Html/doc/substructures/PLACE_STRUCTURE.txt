@@ -1,0 +1,5 @@
+PLACE_STRUCTURE:= 
+n PLAC <PLACE_VALUE>													{1:1} 
+	+1 FORM <PLACE_HIERARCHY>											{0:1} 
+	+1 <<SOURCE_CITATION>>												{0:M} 
+	+1 <<NOTE_STRUCTURE>>												{0:M}

@@ -1,0 +1,3 @@
+DIGIT:=	{Size=1:1} 
+
+A single digit (0-9).

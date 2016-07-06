@@ -1,0 +1,4 @@
+TEMPLE_CODE:=	{Size=4:5} 
+
+An abbreviation of the temple in which LDS temple ordinances were performed. 
+(See Appendix C, page 87.)

@@ -1,0 +1,3 @@
+XREF:FAM:=	{Size=1:22} 
+
+A pointer to, or a cross-reference identifier of, a fam_record.

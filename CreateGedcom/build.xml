@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<project default="dist">
+	<property name="Xjaxb.home" value="/dev/workspace/libs/jwsdp/jaxb/lib"/>
+	<property name="jaxb.home" value="lib"/>
+	<property name="build" value="build"/>
+	<property name="dist" value="dist"/>
+	<property name="stylesheets.dir" value="dist/stylesheets"/>
+	<property name="src" value="src"/>
+	<property name="gen-src" value="gen-src"/>
+	<property name="gedcom.jar" value="${dist}/lib/gedcom.jar"/>
+	<property name="docs" value="${dist}/docs"/>
+
+	<path id="classpath">
+		<fileset dir="${jaxb.home}" includes="*.jar" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+	</path>
+
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<fileset dir="${jaxb.home}" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<!--compile Java source files-->
+	<target name="jaxb" description="Generate jaxb files from gedcom schema">
+		<echo message="Generating Java source from xsd..." />
+		<mkdir dir="${gen-src}" />
+		<xjc schema="schemas/GEDCOM60.xsd" package="jaxb.gedcom" destdir="${gen-src}">
+			<classpath refid="classpath" />
+			<binding dir="schemas" includes="*.xjb" />
+			<produces dir="${gen-src}/jaxb/gedcom" includes="**/*.java" />
+		</xjc>
+	</target>
+
+	<target name="build" depends="jaxb">
+		<mkdir dir="${build}/classes"/>
+		<javac destdir="${build}/classes" debug="on">
+			<classpath refid="classpath" />
+			<src path="${src}"/>
+			<src path="${gen-src}"/>
+		</javac>
+	</target>
+
+	<target name="docs" depends="build">
+		<javadoc packagenames="gedcom.*,jaxb.gedcom"
+	           sourcepath="${src}:${gen-src}"
+	           defaultexcludes="yes"
+	           destdir="${docs}/api"
+	    	   overview="src/overview.html"
+	           author="true"
+	           version="true"
+	           use="true"
+	           windowtitle="createGedcom">
+			<classpath refid="classpath" />
+			<doctitle>
+				<![CDATA[<h1>createGedcom</h1>]]></doctitle>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2006 Toccata Software Inc. All Rights Reserved.</i>]]></bottom>
+	<tag name="todo" scope="all" description="To do:"/>
+</javadoc>
+</target>
+
+
+<target name="stylesheets">
+<delete dir="${stylesheets.dir}"/>
+<mkdir dir="${stylesheets.dir}"/>
+<copy file="stylesheets.xml" tofile="${stylesheets.dir}/build.xml" />
+<copy file="GEDCOM_STYLESHEETS_README.txt" todir="${stylesheets.dir}" />
+<copy  todir="${stylesheets.dir}/style">
+	<fileset dir="style"/>
+</copy>
+<copy  todir="${stylesheets.dir}/schemas">
+	<fileset dir="schemas">
+		<exclude name="**/jaxbSuffix.xjb"/>
+	</fileset>
+</copy>
+
+</target>
+
+<target name="jars" depends="build">
+<mkdir dir="${dist}/lib"/>
+<jar destfile="${gedcom.jar}"
+	       basedir="${build}/classes"
+	       excludes="${build}/classes/example/**"
+	  />
+</target>
+
+<target name="example" depends="build">
+<copy file="src/example/build.xml" todir="${dist}" />
+<copy todir="${dist}/src/example">
+	<fileset dir="${src}/example/">
+		<include name="**/*.java"/>
+	</fileset>
+</copy>
+
+</target>
+
+<target name="dist" depends="docs,stylesheets,jars,example">
+<zip destfile="gedcom_stylesheets.zip"
+		         basedir="${dist}/stylesheets"
+		    />
+<zip destfile="create_gedcom.zip"
+	basedir="${dist}"
+	/>
+<zip destfile="create_gedcom_src.zip">
+	<zipfileset dir="src" prefix="src"/>
+	<zipfileset dir="schemas" prefix="schemas"/>
+	<zipfileset dir="style" prefix="style"/>
+	<zipfileset file="build.xml"/>
+	<zipfileset file="GEDCOM_STYLESHEETS_README.txt"/>
+	<zipfileset file="stylesheets.xml"/>
+</zip>	
+</target>
+
+<target name="clean" description="Deletes all the generated artifacts.">
+<delete dir="${dist}" failonerror="false" />
+<delete dir="${docs}" failonerror="false" />
+<delete dir="${gen-src}" failonerror="false" />
+<delete dir="${build}" failonerror="false" />
+</target>
+</project>
+

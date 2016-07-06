@@ -1,0 +1,4 @@
+ADDRESS_LINE1:=	{Size=1:60} 
+
+The first line of the address used for indexing.  This corresponds to the 
+ADDRESS_LINE value of the ADDR line in the address structure.

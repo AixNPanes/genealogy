@@ -1,0 +1,4 @@
+ANCESTRAL_FILE_NUMBER:=	{Size=1:12} 
+
+A unique permanent record number of an individual record contained in the 
+Family History Department's Ancestral File.

@@ -1,0 +1,5 @@
+ORDINANCE_PROCESS_FLAG:=	{Size=2:3} 
+[ yes | no ] 
+
+A flag that indicates whether submission should be processed for clearing 
+temple ordinances. 

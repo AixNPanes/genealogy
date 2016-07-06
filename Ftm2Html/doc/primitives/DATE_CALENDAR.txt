@@ -1,0 +1,39 @@
+DATE_CALENDAR:=	{Size=4:35} 
+[ <DATE_GREG> | <DATE_JULN> | <DATE_HEBR> | <DATE_FREN> |  <DATE_FUTURE> ]
+
+The selection is based on the <DATE_CALENDAR_ESCAPE> that precedes the 
+<DATE_CALENDAR> value immediately to the left.  If <DATE_CALENDAR_ESCAPE> 
+doesn't appear at this point, then @#DGREGORIAN@ is assumed.  No future 
+calendar types will use words (e.g., month names) from this list: FROM, 
+TO, BEF, AFT, BET, AND, ABT, EST, CAL, or INT. When only a day and month 
+appears as a DATE value it is considered a date phrase and not a valid date 
+form.
+
+Date Escape	Syntax Selected
+
+@#DGREGORIAN@ <DATE_GREG>    
+@#DJULIAN@	<DATE_JULN>    
+@#DHEBREW@	<DATE_HEBR>    
+@#DFRENCH R@	<DATE_FREN>    
+@#DROMAN@	for future definition    
+@#DUNKNOWN@  calendar not known
+
+DATE_CALENDAR_ESCAPE:=	{Size=4:15}   
+[ 
+@#DHEBREW@ 
+| 
+@#DROMAN@ 
+| 
+@#DFRENCH R@ 
+| 
+@#DGREGORIAN@ 
+|  
+@#DJULIAN@ 
+| 
+@#DUNKNOWN@ 
+] 
+
+The date escape determines the date interpretation by signifying which 
+<DATE_CALENDAR> to use.
+
+The default calendar is the Gregorian calendar.

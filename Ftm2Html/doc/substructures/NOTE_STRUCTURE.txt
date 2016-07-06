@@ -1,0 +1,9 @@
+NOTE_STRUCTURE:= 
+[ 
+n NOTE @<XREF:NOTE>@													{1:1} 
+	+1 <<SOURCE_CITATION>>												{0:M} 
+| 
+n NOTE [SUBMITTER_TEXT> | <NULL>]										{1:1} 
+	+1 [ CONC | CONT ] <SUBMITTER_TEXT>									{0:M} 
+	+1 <<SOURCE_CITATION>>												{0:M}
+]

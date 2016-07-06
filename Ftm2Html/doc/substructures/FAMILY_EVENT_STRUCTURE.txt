@@ -1,0 +1,35 @@
+FAMILY_EVENT_STRUCTURE:= 
+[ 
+n ANUL [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n DIV [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n DIVF [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n ENGA [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n MARR [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n MARB [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n MARC [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n MARL [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n MARS [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n CENS [Y|<NULL>]														{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+| 
+n EVEN																	{1:1} 
+	+1 <<EVENT_DETAIL>>													{0:1} 
+]

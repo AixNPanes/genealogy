@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	<xsd:element name="GEDCOM">
+		<xsd:annotation>
+			<xsd:documentation> GEDCOM 6.0 DTD 
+		     	 30 December, 2002
+	    
+		     	 Sample minimal GEDCOM 6.0 XML file:
+				(? xml version="1.0" encoding="UTF-8" ?)
+				(!DOCTYPE GEDCOM SYSTEM "GEDCOM60.dtd")
+				(GEDCOM)
+				( HeaderRec)
+				(FileCreation Date="")(/FileCreation)
+				(Submitter)
+				(Link Target="" Ref="")(/Link)
+				(/Submitter)
+				(/HeaderRec)
+				(IndividualRec Id="testID")
+				(/IndividualRec)
+				(/GEDCOM)
+		    	 (Remove extra spaces from xml and HeaderRec tags,
+	     		added here to allow display in a browser.)
+
+	     		GEDCOM 6.0 spec is available at http://www.familysearch.org/GEDCOM/GedXML60.pdf
+ 
+				GEDCOM root
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+			<xsd:element ref="HeaderRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="FamilyRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="1" ref="IndividualRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="EventRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="LDSOrdRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ContactRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="SourceRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="RepositoryRec"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="GroupRec"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HeaderRec">
+		<xsd:annotation>
+			<xsd:documentation> header record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FileCreation"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Citation"/>
+				<xsd:element ref="Submitter"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Note"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FamilyRec">
+		<xsd:annotation>
+			<xsd:documentation> family record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="HusbFath"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="WifeMoth"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Child"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="BasedOn"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ExternalID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Submitter"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Evidence"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Enrichment"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IndividualRec">
+		<xsd:annotation>
+			<xsd:documentation> individual record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="IndivName"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Gender"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="DeathStatus"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="PersInfo"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="AssocIndiv"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="DupIndiv"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ExternalID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Submitter"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Evidence"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Enrichment"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="EventRec">
+		<xsd:annotation>
+			<xsd:documentation> event record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="1" ref="Participant"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Date"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Place"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Religion"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ExternalID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Submitter"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Evidence"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Enrichment"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+			<xsd:attribute name="Type" type="xsd:string" use="required"/>
+			<xsd:attribute name="VitalType" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="birth"/>
+						<xsd:enumeration value="marriage"/>
+						<xsd:enumeration value="death"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LDSOrdRec">
+		<xsd:annotation>
+			<xsd:documentation> LDS ordinance record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="1" ref="Participant"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="OrdStat"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="TempleCode"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Date"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Place"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="BasedOn"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ExternalID"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Submitter"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Evidence"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Enrichment"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+			<xsd:attribute name="Type" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="B"/>
+						<xsd:enumeration value="C"/>
+						<xsd:enumeration value="E"/>
+						<xsd:enumeration value="SM"/>
+						<xsd:enumeration value="SP"/>
+						<xsd:enumeration value="SS"/>
+						<xsd:enumeration value="TO"/>
+						<xsd:enumeration value="W"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ContactRec">
+		<xsd:annotation>
+			<xsd:documentation> contact record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Name"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="MailAddress"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Phone"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Email"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="URI"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Public"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="SameIndiv"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+			<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SourceRec">
+		<xsd:annotation>
+			<xsd:documentation> source record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Repository"/>
+				<xsd:element ref="Title"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Article"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Author"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="URI"/>
+				<xsd:element maxOccurs="1" minOccurs="0" ref="Publishing"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+			<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+			<xsd:attribute ref="xml:lang"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RepositoryRec">
+		<xsd:annotation>
+			<xsd:documentation> repository record </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Name"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="MailAddress"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Phone"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Email"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="URI"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+			</xsd:sequence>
+			<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+			<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="GroupRec">
+	<xsd:annotation>
+		<xsd:documentation> group record </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Name"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Contact"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Member"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ParentGroup"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="MailAddress"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Phone"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Email"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="URI"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="ExternalID"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Submitter"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Evidence"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Enrichment"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Changed"/>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="required"/>
+		<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Addressee" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> subrecord elements </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="AddrLine">
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="Addressee"/>
+			<xsd:element ref="PlacePart"/>
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Age" type="xsd:string"/>
+<xsd:element name="Article" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> content = YY[ y MM m DD d], e.g., 26 y 4 m 21 d </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="Association" type="xsd:string"/>
+<xsd:element name="AssocIndiv">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element ref="Association"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Citation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Author" type="xsd:string"/>
+<xsd:element name="b" type="xsd:string"/>
+<xsd:element name="BasedOn">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Link"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="blockquote" type="xsd:string"/>
+<xsd:element name="br">
+	<xsd:complexType/>
+</xsd:element>
+<xsd:element name="CallNbr" type="xsd:string"/>
+<xsd:element name="Caption" type="xsd:string"/>
+<xsd:element name="center" type="xsd:string"/>
+<xsd:element name="Changed">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Contact"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Note"/>
+		</xsd:sequence>
+		<xsd:attribute name="Date" type="xsd:string" use="required"/>
+		<xsd:attribute name="Time" type="xsd:string" use="required"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Child">
+	<xsd:annotation>
+		<xsd:documentation> Date = D MMM YYYY, e.g., 3 MAR 1842 
+ 			Time = H:MM[:SS[.F]], e.g., 5:42:03.8 </xsd:documentation>
+		</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="ChildNbr"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="RelToFath"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="RelToMoth"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="ChildNbr" type="xsd:string"/>
+<xsd:element name="Citation">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Caption"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="WhereInSource"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="WhenRecorded"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Extract"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Contact">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Coordinates" type="xsd:string"/>
+<xsd:element name="Copyright" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> example: N35.6756 W67.8967 </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="Date">
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Calendar" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="DeathStatus" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> Calendar = Gregorian|Julian|Hebrew|French|Roman|unknown </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="DupIndiv">
+	<xsd:annotation>
+		<xsd:documentation> content = dead|stillborn|infant|child </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Citation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Email" type="xsd:string"/>
+<xsd:element name="Enrichment">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Citation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Evidence">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Citation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="ExternalID">
+	<xsd:complexType>
+		<xsd:attribute name="Type" type="xsd:string" use="required"/>
+		<xsd:attribute name="Id" type="xsd:string" use="required"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Extract">
+	<xsd:annotation>
+		<xsd:documentation> Type = User|AFN </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="u"/>
+			<xsd:element ref="b"/>
+			<xsd:element ref="i"/>
+			<xsd:element ref="blockquote"/>
+			<xsd:element ref="br"/>
+			<xsd:element ref="p"/>
+			<xsd:element ref="sub"/>
+			<xsd:element ref="sup"/>
+			<xsd:element ref="center"/>
+		</xsd:choice>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="FamilyNbr" type="xsd:string"/>
+<xsd:element name="FileCreation">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Product"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Copyright"/>
+		</xsd:sequence>
+		<xsd:attribute name="Date" type="xsd:string" use="required"/>
+		<xsd:attribute name="Time" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Gender" type="xsd:string"/>
+<xsd:element name="HusbFath">
+	<xsd:annotation>
+		<xsd:documentation> content = F|M|U </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="FamilyNbr"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="i" type="xsd:string"/>
+<xsd:element name="IndivName">
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="NamePart"/>
+			<xsd:element ref="IndNameVariation"/>
+		</xsd:choice>
+		<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Method" type="xsd:string" use="optional"/>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="IndNameVariation">
+	<xsd:annotation>
+		<xsd:documentation> Type = nickname|alias|aka|married|maiden|... </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="NamePart"/>
+		</xsd:choice>
+		<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+		<xsd:attribute name="Method" type="xsd:string" use="optional"/>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Information" type="xsd:string"/>
+<xsd:element name="Link">
+	<xsd:complexType>
+		<xsd:attribute name="Target" type="xsd:string" use="required"/>
+		<xsd:attribute name="Ref" type="xsd:IDREF" use="required"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Living" type="xsd:string"/>
+<xsd:element name="MailAddress">
+	<xsd:annotation>
+		<xsd:documentation> content = Y|N </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="AddrLine"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Member">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Role"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Name">
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+				<xsd:attribute ref="xml:lang"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="NamePart">
+	<xsd:annotation>
+		<xsd:documentation> Type = product|person|business|organization|government agency|... </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Type" type="xsd:string" use="required"/>
+				<xsd:attribute name="Level" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Note">
+	<xsd:annotation>
+		<xsd:documentation> Level 1=surname, 2=maiden name, 3=given name </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute ref="xml:lang"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="OrdStat">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Date"/>
+		</xsd:sequence>
+		<xsd:attribute name="Code" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="bic"/>
+					<xsd:enumeration value="canceled"/>
+					<xsd:enumeration value="child"/>
+					<xsd:enumeration value="cleared"/>
+					<xsd:enumeration value="completed"/>
+					<xsd:enumeration value="dns"/>
+					<xsd:enumeration value="qualified"/>
+					<xsd:enumeration value="stillborn"/>
+					<xsd:enumeration value="submitted"/>
+					<xsd:enumeration value="uncleared"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="p" type="xsd:string"/>
+<xsd:element name="ParentGroup">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Participant">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Role"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Living"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Age"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="PersInfo">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Information"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Date"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Place"/>
+		</xsd:sequence>
+	<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Phone">
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Place">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="PlaceName"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Coordinates"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="PlaceNameVar"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="PlaceName">
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="PlacePart"/>
+		</xsd:choice>
+		<xsd:attribute name="Method" type="xsd:string" use="optional"/>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="PlaceNameVar">
+	<xsd:complexType mixed="true">
+		<xsd:choice maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="PlacePart"/>
+		</xsd:choice>
+		<xsd:attribute name="Method" type="xsd:string" use="optional"/>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="PlacePart">
+	<xsd:complexType>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Type" type="xsd:string" use="optional"/>
+				<xsd:attribute name="Level" use="optional">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="1"/>
+							<xsd:enumeration value="2"/>
+							<xsd:enumeration value="3"/>
+							<xsd:enumeration value="4"/>
+							<xsd:enumeration value="5"/>
+							<xsd:enumeration value="6"/>
+							<xsd:enumeration value="7"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Product">
+	<xsd:annotation>
+		<xsd:documentation> Level 1=country, 2=US state, 3=US county, 4=city/town, 5=postal code </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="ProductId"/>
+			<xsd:element ref="Version"/>
+			<xsd:element ref="Name"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="Supplier"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="ProductId" type="xsd:string"/>
+<xsd:element name="Public" type="xsd:string"/>
+<xsd:element name="Publishing" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> content = Y|N </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="Religion" type="xsd:string"/>
+<xsd:element name="RelToFath" type="xsd:string"/>
+<xsd:element name="RelToMoth" type="xsd:string">
+	<xsd:annotation>
+		<xsd:documentation> content = biological|adopted|foster|sealing|... </xsd:documentation>
+	</xsd:annotation>
+</xsd:element>
+<xsd:element name="Repository">
+	<xsd:annotation>
+		<xsd:documentation> content = biological|adopted|foster|sealing|... </xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="CallNbr"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="Role" type="xsd:string"/>
+<xsd:element name="SameIndiv">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="Note"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="sub" type="xsd:string"/>
+<xsd:element name="Submitter">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="sup" type="xsd:string"/>
+<xsd:element name="Supplier">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="TempleCode" type="xsd:string"/>
+<xsd:element name="Title" type="xsd:string"/>
+<xsd:element name="u" type="xsd:string"/>
+<xsd:element name="URI" type="xsd:string"/>
+<xsd:element name="Version" type="xsd:string"/>
+<xsd:element name="WhenRecorded" type="xsd:string"/>
+<xsd:element name="WhereInSource" type="xsd:string"/>
+<xsd:element name="WifeMoth">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="Link"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="FamilyNbr"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+</xsd:schema>

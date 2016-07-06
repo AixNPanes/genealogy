@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- http://openjpa.apache.org/builds/latest/docs/manual/manual.html#ref_guide_pc_enhance_build -->
+<!-- http://openjpa.apache.org/builds/latest/docs/manual/manual.html#ref_guide_integration_enhance -->
+<project>
+	<property name="basedir" value="c:/EclipseProjects/Genealogy/XmlOrigToSql"/>
+	<property name="src" value="${basedir}/src"/>
+	<property name="bin" value="${basedir}/build/classes"/>
+	<property name="modeldir" value="www/daley/genealogy/db/**"/>
+	<property name="jpa.classes" value="ws.daley.genealogy.db.Gedcom55"/>
+
+	<path id="enhancer.classpath">
+		<pathelement location="C:/EclipseProjects/Genealogy/OpenJPA-1.2.2/lib/serp-1.13.1.jar"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/OpenJPA-1.2.2/lib/openjpa-1.2.2.jar"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/commons-lang-2.1.jar"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/geronimo-jta_1.1_spec-1.1.jar"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/apache-openjpa-1.2.1/lib/geronimo-jpa_3.0_spec-1.0.jar"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/XmlOrigToSql/src/"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/XmlOrigToSql/src/META-INF/"/>
+		<pathelement location="C:/EclipseProjects/Genealogy/XmlOrigToSql/src/META-INF/persistence.xml"/>
+	</path>
+
+	<!-- mappingtool>
+	  <fileset dir="${src}">
+	    <include name="${modeldir}/*.java" />
+	  </fileset>
+	  <config connectionUserName="root" connectionPassword="iosnei"
+	    connectionURL="jdbc:mysql:///genealogy_origxml"
+	    connectionDriverName="com.mysql.jdbc.Driver" />
+	</mappingtool>
+
+	<openjpac>
+	  <fileset dir="${bin}">
+	    <include name="${modeldir}/*.class" />
+	  </fileset>
+	  <classpath>
+	    <pathelement location="${basedir}/bin"/>
+	    <pathelement location="${basedir}/src"/>
+	    <pathelement path="${java.class.path}"/>
+	  </classpath>
+	</openjpac>
+
+	<reversemappingtool package="com.xyz.jdo" directory="${basedir}/src">
+	  <codeformat tabSpaces="4" spaceBeforeParen="true" braceOnSameLine="false"/>
+	</reversemappingtool -->
+
+	<target name="enhance">
+	  <!-- define the openjpac task; this can be done at the top of the    -->
+	  <!-- build.xml file, so it will be available for all targets      -->
+	  <taskdef name="openjpac" classname="org.apache.openjpa.ant.PCEnhancerTask" classpathref="enhancer.classpath"/>
+
+	  <!-- invoke enhancer on all .java files below the model directory -->
+	  <openjpac>
+	    <fileset dir="${src}">
+	      <include name="${modeldir}/*.java" />
+	    </fileset>
+	  </openjpac>
+	</target>
+
+	
+	<target name="derivations">
+	    <property file="${arc}/META-INF/jpa_enhance.properties" /> 
+	    <java classname="org.apache.openjpa.lib.conf.ProductDerivations" 
+	        classpathref="enhancer.classpath" fork="true"> 
+ 	        <arg line="ws.daley.genealogy.db.Gedcom55"/>  
+	    </java> 
+	</target>
+</project>

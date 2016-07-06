@@ -1,0 +1,5 @@
+SEX_VALUE:=	{Size=1:7} 
+
+A code that indicates the sex of the individual:
+M 	= Male                               
+F	= Female

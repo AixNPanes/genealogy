@@ -1,0 +1,4 @@
+POSSESSIONS:=	{Size=1:248} 
+
+A list of possessions (real estate or other property) belonging to this 
+individual.

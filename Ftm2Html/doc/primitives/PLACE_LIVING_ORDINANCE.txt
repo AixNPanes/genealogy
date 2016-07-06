@@ -1,0 +1,5 @@
+PLACE_LIVING_ORDINANCE:=	{Size=1:120} 
+<PLACE_VALUE> 
+
+The locality of the place where a living LDS ordinance took place.  Usually 
+only a living LDS baptism place is recorded in this field.

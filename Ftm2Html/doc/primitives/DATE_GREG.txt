@@ -1,0 +1,4 @@
+DATE_GREG:=	{Size=4:35} 
+[ <YEAR_GREG> | <MONTH> <YEAR_GREG> |  <DAY> <MONTH> <YEAR_GREG> ]
+
+See <YEAR_GREG>

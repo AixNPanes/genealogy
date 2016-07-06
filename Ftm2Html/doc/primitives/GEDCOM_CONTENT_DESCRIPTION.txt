@@ -1,0 +1,5 @@
+GEDCOM_CONTENT_DESCRIPTION:=	{Size=1:248} 
+
+A note that a user enters to describe the contents of the lineage-linked file 
+in terms of "ancestors or descendants of" so that the person receiving the data 
+knows what genealogical information the transmission contains.

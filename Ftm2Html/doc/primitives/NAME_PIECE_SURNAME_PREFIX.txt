@@ -1,0 +1,6 @@
+NAME_PIECE_SURNAME_PREFIX:=	{Size=1:30} 
+[ <NAME_PIECE> | <NAME_PIECE_SURNAME_PREFIX>, <NAME_PIECE> ] 
+
+Surname prefix or article used in a family name. Different surname articles 
+are separated by a comma, for example in the name "de la Cruz", this value 
+would be "de, la".

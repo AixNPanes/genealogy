@@ -1,0 +1,1708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="gedcom55">
+		<xs:annotation>
+			<xs:documentation>
+				 GEDCOM 6.0 DTD 
+	     		 30 December, 2002
+    
+			     Sample minimal GEDCOM 6.0 XML file:
+				(? xml version="1.0" encoding="UTF-8" ?)
+				(!DOCTYPE GEDCOM SYSTEM "GEDCOM55.dtd")
+				(GEDCOM55)
+				( HeaderRec)
+				(FileCreation Date="")(/FileCreation)
+				(Submitter)
+				(Link Target="" Ref="")(/Link)
+				(/Submitter)
+				(/HeaderRec)
+				(IndividualRec Id="testID")
+				(/IndividualRec)
+				(/GEDCOM55)
+			     (Remove extra spaces from xml and HeaderRec tags,
+			     added here to allow display in a browser.)
+
+			     GEDCOM 6.0 spec is available at http://www.familysearch.org/GEDCOM/GedXML60.pdf
+ 
+				 GEDCOM55 root 
+
+				<!--
+				0 <<HEADER>>															{1:1}
+				0 <<SUBMISSION_RECORD>>													{0:1}
+				0 <<RECORD>>															{1:M}
+				0 TRLR																	{1:1}
+				 --> 
+
+				<!--
+				RECORD:= 
+				[ 
+				n <<FAM_RECORD>>														{1:1} 
+				| 
+				n <<INDIVIDUAL_RECORD>>													{1:1} 
+				| 
+				n <<MULTIMEDIA_RECORD>>													{1:M} 
+				| 
+				n <<NOTE_RECORD>>														{1:1} 
+				| 
+				n <<REPOSITORY_RECORD>>													{1:1} 
+				| 
+				n <<SOURCE_RECORD>>														{1:1} 
+				|
+				n <<SUBMITTER_RECORD>>													{1:1} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HEADRecord"/>
+				<xs:element ref="SUBNRecord" minOccurs="0"/>
+				<xs:element ref="INDIRecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="FAMRecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OBJERecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="NOTERecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="REPORecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SOURRecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SUBMRecord" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TRLRRecord"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="HEADRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				HEADER:=
+				n HEAD																	{1:1}
+					+1 SOUR <APPROVED_SYSTEM_ID>										{1:1}
+						+2 VERS <VERSION_NUMBER>										{0:1} 
+						+2 NAME <NAME_OF_PRODUCT>										{0:1} 
+						+2 CORP <NAME_OF_BUSINESS>										{0:1} 
+							+3 <<ADDRESS_STRUCTURE>>									{0:1} 
+						+2 DATA <NAME_OF_SOURCE_DATA>									{0:1} 
+							+3 DATE <PUBLICATION_DATE>									{0:1} 
+							+3 COPR <COPYRIGHT_SOURCE_DATA>								{0:1} 
+					+1 DEST <RECEIVING_SYSTEM_NAME>										{0:1*} 
+					+1 DATE <TRANSMISSION_DATE>											{0:1} 
+						+2 TIME <TIME_VALUE>											{0:1} 
+					+1 SUBM @XREF:SUBM@													{1:1} 
+					+1 SUBN @XREF:SUBN@													{0:1} 
+					+1 FILE <FILE_NAME>													{0:1} 
+					+1 COPR <COPYRIGHT_GEDCOM_FILE>										{0:1} 
+					+1 GEDC																{1:1} 
+						+2 VERS <VERSION_NUMBER>										{1:1} 
+						+2 FORM <GEDCOM_FORM>											{1:1} 
+					+1 CHAR <CHARACTER_SET>												{1:1} 
+						+2 VERS <VERSION_NUMBER>										{0:1} 
+					+1 LANG <LANGUAGE_OF_TEXT>											{0:1} 
+					+1 PLAC																{0:1} 
+						+2 FORM <PLACE_HIERARCHY>										{1:1} 
+					+1 NOTE <GEDCOM_CONTENT_DESCRIPTION>								{0:1} 
+						+2 [CONT|CONC] <GEDCOM_CONTENT_DESCRIPTION>						{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SOUR" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="VERS" type="valueline" minOccurs="0"/>
+									<xs:element name="NAME" type="valueline" minOccurs="0"/>
+									<xs:element name="CORP" type="AddressStructureType" minOccurs="0"/>
+									<xs:element name="DATA" minOccurs="0">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="valuestruct">
+													<xs:sequence>
+														<xs:element name="DATE" type="valueline" minOccurs="0"/>
+														<xs:element name="COPR" type="valueline" minOccurs="0"/>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DEST" type="valueline" minOccurs="0"/>
+				<xs:element name="DATE" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="TIME" type="valueline" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CHAR">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="VERS" type="valueline" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FILE" type="valueline" minOccurs="0"/>
+				<xs:element name="SUBM" type="valueline"/>
+				<xs:element name="SUBN" type="valueline" minOccurs="0"/>
+				<xs:element name="COPR" type="valueline" minOccurs="0"/>
+				<xs:element name="GEDC">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="struct">
+								<xs:sequence>
+									<xs:element name="VERS" type="valueline"/>
+									<xs:element name="FORM" type="valueline"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="LANG" type="valueline" minOccurs="0"/>
+				<xs:element name="PLAC" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="struct">
+								<xs:sequence>
+									<xs:element name="FORM" type="valueline"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="NOTE" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SUBNRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				SUBMISSION_RECORD:=
+
+				n @XREF:SUBN@ SUBN														{1:1] 
+					+1 SUBM @XREF:SUBM@													{0:1} 
+					+1 FAMF <NAME_OF_FAMILY_FILE>										{0:1} 
+					+1 TEMP <TEMPLE_CODE>												{0:1} 
+					+1 ANCE <GENERATIONS_OF_ANCESTORS>									{0:1} 
+					+1 DESC <GENERATIONS_OF_DESCENDANTS>								{0:1} 
+					+1 ORDI <ORDINANCE_PROCESS_FLAG>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="SUBM" type="valueline" minOccurs="0"/>
+						<xs:element name="FAMF" type="valueline" minOccurs="0"/>
+						<xs:element name="TEMP" type="valueline" minOccurs="0"/>
+						<xs:element name="ANCE" type="valueline" minOccurs="0"/>
+						<xs:element name="DESC" type="valueline" minOccurs="0"/>
+						<xs:element name="ORID" type="valueline" minOccurs="0"/>
+						<xs:element name="RIN" type="valueline" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="OBJERecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				MULTIMEDIA_RECORD:=
+				n @XREF:OBJE@ OBJE														{1:1} 
+					+1 FORM <MULTIMEDIA_FORMAT>											{1:1} 
+					+1 TITL <DESCRIPTIVE_TITLE>											{0:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 BLOB																{1:1} 
+						+2 CONT <ENCODED_MULTIMEDIA_LINE>								{1:M} 
+					+1 OBJE @<XREF:OBJE>@     /* chain to continued object */			{0:1} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="FORM" type="valueline"/>
+						<xs:element name="TITL" type="valueline" minOccurs="0"/>
+						<xs:element name="NOTE" minOccurs="0"/>
+						<xs:element name="BLOB" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="OBJE" type="valueline" minOccurs="0"/>
+						<xs:element name="REFN" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="TYPE" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RIN" type="valueline" minOccurs="0"/>
+						<xs:element name="CHAN" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="NOTERecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				NOTE_RECORD:=
+				n @<XREF:NOTE>@ NOTE <SUBMITTER_TEXT>									{1:1} 
+					+1 [ CONC | CONT] <SUBMITTER_TEXT>									{0:M} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="SOUR" minOccurs="0"/>
+						<xs:element name="REFN" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="TYPE" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RIN" type="valueline" minOccurs="0"/>
+						<xs:element name="CHAN" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SOURRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				SOURCE_RECORD:=
+				n @<XREF:SOUR>@ SOUR													{1:1} 
+					+1 DATA																{0:1} 
+						+2 EVEN <EVENTS_RECORDED>										{0:M} 
+							+3 DATE <DATE_PERIOD>										{0:1} 
+							+3 PLAC <SOURCE_JURISDICTION_PLACE>							{0:1} 
+						+2 AGNC <RESPONSIBLE_AGENCY>									{0:1} 
+						+2 <<NOTE_STRUCTURE>>											{0:M} 
+					+1 AUTH <SOURCE_ORIGINATOR>											{0:1} 
+						+2 [CONT|CONC] <SOURCE_ORIGINATOR>								{0:M} 
+					+1 TITL <SOURCE_DESCRIPTIVE_TITLE>									{0:1} 
+						+2 [CONT|CONC] <SOURCE_DESCRIPTIVE_TITLE>						{0:M} 
+					+1 ABBR <SOURCE_FILED_BY_ENTRY>										{0:1} 
+					+1 PUBL <SOURCE_PUBLICATION_FACTS>									{0:1} 
+						+2 [CONT|CONC] <SOURCE_PUBLICATION_FACTS>						{0:M} 
+					+1 TEXT <TEXT_FROM_SOURCE>											{0:1} 
+						+2 [CONT|CONC] <TEXT_FROM_SOURCE>								{0:M} 
+					+1 <<SOURCE_REPOSITORY_CITATION>>									{0:1} 
+					+1 <<MULTIMEDIA_LINK>>												{0:M}
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="DATA" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="EVEN" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="valuestruct">
+															<xs:sequence>
+																<xs:element name="DATE" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+																<xs:element name="PLAC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="AGNC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+											<xs:group ref="NoteStructureGroup" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AUTH" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+											<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TITL" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+											<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ABBR" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="PUBL" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+											<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TEXT" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+											<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="SOUR" minOccurs="0"/>
+						<xs:element name="OBJE" minOccurs="0"/>
+						<xs:element name="NOTE" minOccurs="0"/>
+						<xs:element name="REFN" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="TYPE" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RIN" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="CHAN" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="REPORecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				REPOSITORY_RECORD:=
+				n @<XREF:REPO>@ REPO													{1:1} 
+					+1 NAME <NAME_OF_REPOSITORY> 										{0:1} 
+					+1 <<ADDRESS_STRUCTURE>>											{0:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="CONT" type="valueline" minOccurs="0"/>
+						<xs:group ref="AddressStructureGroup" minOccurs="0"/>
+						<xs:element name="NOTE" minOccurs="0"/>
+						<xs:element name="REFN" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="valuestruct">
+										<xs:sequence>
+											<xs:element name="TYPE" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RIN" type="valueline" minOccurs="0"/>
+						<xs:element name="CHAN" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="SUBMRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				SUBMITTER_RECORD:=
+
+				n @<XREF:SUBM>@ SUBM													{1:1} 
+					+1 NAME <SUBMITTER_NAME>											{1:1} 
+					+1 <<ADDRESS_STRUCTURE>>											{0:1} 
+					+1 <<MULTIMEDIA_LINK>>												{0:M} 
+					+1 LANG <LANGUAGE_PREFERENCE>										{0:3} 
+					+1 RFN <SUBMITTER_REGISTERED_RFN>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="idstruct">
+					<xs:sequence>
+						<xs:element name="NAME" type="valueline" minOccurs="0"/>
+						<xs:group ref="AddressStructureGroup" minOccurs="0"/>
+						<xs:element name="EMAIL" type="valueline" minOccurs="0"/>
+						<xs:element name="OBJE" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="LANG" type="line" minOccurs="0" maxOccurs="3"/>
+						<xs:element name="RFN" type="line" minOccurs="0"/>
+						<xs:element name="RIN" type="line" minOccurs="0"/>
+						<xs:element name="CHAN" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="INDIRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				INDIVIDUAL_RECORD:=
+
+				n @XREF:INDI@ INDI														{1:1} 
+					+1 RESN <RESTRICTION_NOTICE>										{0:1} 
+					+1 <<PERSONAL_NAME_STRUCTURE>>										{0:M} 
+					+1 SEX <SEX_VALUE> 													{0:1} 
+					+1 <<INDIVIDUAL_EVENT_STRUCTURE>>									{0:M} 
+					+1 <<INDIVIDUAL_ATTRIBUTE_STRUCTURE>>								{0:M}
+					+1 <<LDS_INDIVIDUAL_ORDINANCE>>										{0:M} 
+					+1 <<CHILD_TO_FAMILY_LINK>>											{0:M} 
+					+1 <<SPOUSE_TO_FAMILY_LINK>>										{0:M} 
+					+1 SUBM @<XREF:SUBM>@												{0:M} 
+					+1 <<ASSOCIATION_STRUCTURE>>										{0:M} 
+					+1 ALIA @<XREF:INDI>@												{0:M} 
+					+1 ANCI @<XREF:SUBM>@												{0:M} 
+					+1 DESI @<XREF:SUBM>@												{0:M} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<MULTIMEDIA_LINK>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 RFN <PERMANENT_RECORD_FILE_NUMBER>								{0:1} 
+					+1 AFN <ANCESTRAL_FILE_NUMBER>										{0:1} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RESN" type="line" minOccurs="0"/>
+				<xs:element name="NAME" type="PersonalNameStructureType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="SEX" type="valueline" minOccurs="0"/>
+				<xs:group ref="IndividualEventStructureGroup" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:group ref="IndividualEventAttributeGroup" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:group ref="LDSIndividualOrdinanceGroup" minOccurs="0"/>
+				<xs:group ref="ChildToFamilyLinkGroup" minOccurs="0"/>
+				<xs:group ref="SpouseToFamilyLinkGroup" minOccurs="0"/>
+				<xs:element name="SUBM" type="valueline" minOccurs="0"/>
+				<xs:group ref="AssociationStructureGroup" minOccurs="0"/>
+				<xs:element name="ALIA" type="valueline" minOccurs="0"/>
+				<xs:element name="ANCI" type="valueline" minOccurs="0"/>
+				<xs:element name="DESI" type="valueline" minOccurs="0"/>
+				<xs:element name="SOUR" minOccurs="0"/>
+				<xs:element name="OBJE" minOccurs="0"/>
+				<xs:element name="NOTE" minOccurs="0"/>
+				<xs:element name="RFN" type="valueline" minOccurs="0"/>
+				<xs:element name="AFN" type="valueline" minOccurs="0"/>
+				<xs:element name="REFN" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="TYPE" type="valueline" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="RIN" type="valueline" minOccurs="0"/>
+				<xs:element name="CHAN" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="gedid" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="FAMRecord">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				FAM_RECORD:=
+
+				n @<XREF:FAM>@ FAM														{1:1} 
+					+1 <<FAMILY_EVENT_STRUCTURE>>										{0:M} 
+						+2 HUSB															{0:1} 
+							+3 AGE <AGE_AT_EVENT>										{1:1} 
+						+2 WIFE															{0:1} 
+							+3 AGE <AGE_AT_EVENT>										{1:1} 
+					+1 HUSB @<XREF:INDI>@												{0:1} 
+					+1 WIFE @<XREF:INDI>@												{0:1} 
+					+1 CHIL @<XREF:INDI>@												{0:M} 
+					+1 NCHI <COUNT_OF_CHILDREN>											{0:1} 
+					+1 SUBM @<XREF:SUBM>@												{0:M} 
+					+1 <<LDS_SPOUSE_SEALING>>											{0:M} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<MULTIMEDIA_LINK>>												{0:M}
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 REFN <USER_REFERENCE_NUMBER>										{0:M}
+						+2 TYPE <USER_REFERENCE_TYPE>									{0:1} 
+					+1 RIN <AUTOMATED_RECORD_ID>										{0:1} 
+					+1 <<CHANGE_DATE>>													{0:1}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="HUSB" type="valueline" minOccurs="0"/>
+				<xs:element name="WIFE" type="valueline" minOccurs="0"/>
+				<xs:group ref="FamilyEventStructureGroup" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="CHIL" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="_FREL" type="valueline" minOccurs="0"/>
+									<xs:element name="_MREL" type="valueline" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="NCHI" type="valueline" minOccurs="0"/>
+				<xs:element name="SUBM" type="valueline" minOccurs="0"/>
+				<xs:group ref="LDSSpouseSealingGroup" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="OBJE" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="REFN" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="valuestruct">
+								<xs:sequence>
+									<xs:element name="TYPE" type="valueline" minOccurs="0"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="RIN" type="line" minOccurs="0"/>
+				<xs:element name="CHAN" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="gedid" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="TRLRRecord" type="line">
+		<xs:annotation>
+			<xs:documentation>
+				<!-- 
+				0 TRLR
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:simpleType name="gedid">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="@[a-zA-Z0-9_#]+@"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="idline">
+		<xs:attribute name="id" type="gedid" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="line">
+	</xs:complexType>
+	
+	<xs:complexType name="valueline">
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="idvalueline">
+		<xs:attribute name="id" type="gedid" use="required"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="idstruct">
+		<xs:attribute name="id" type="gedid" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="struct">
+	</xs:complexType>
+	
+	<xs:complexType name="valuestruct">
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="idvaluestruct">
+		<xs:attribute name="id" type="gedid" use="required"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:group name="AddressStructureGroup">
+		<xs:sequence>
+			<xs:element name="ADDR" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="ADR1" type="valueline" minOccurs="0"/>
+						<xs:element name="ADR2" type="valueline" minOccurs="0"/>
+						<xs:element name="CITY" type="valueline" minOccurs="0"/>
+						<xs:element name="STAE" type="valueline" minOccurs="0"/>
+						<xs:element name="POST" type="valueline" minOccurs="0"/>
+						<xs:element name="CTRY" type="valueline" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="value" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PHON" type="valueline" minOccurs="0" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="AddressStructureType">
+		<xs:group ref="AddressStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="AddressStructure" type="AddressStructureType"/>
+	
+	<xs:group name="MultimediaGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				MULTIMEDIA_LINK:=
+				[	/* embedded form*/ 
+				n OBJE @<XREF:OBJE>@													{1:1} 
+				|	/* linked form*/ 
+				n OBJE 																	{1:1} 
+					+1 FORM <MULTIMEDIA_FORMAT>											{1:1} 
+					+1 TITL <DESCRIPTIVE_TITLE>											{0:1} 
+					+1 FILE <MULTIMEDIA_FILE_REFERENCE>									{1:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>			
+		<xs:sequence>
+<!-- 			<xs:element name="OBJE" type="valueline" minOccurs="0"/> -->
+			<xs:element name="OBJE" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FORM" type="line" minOccurs="0"/>
+						<xs:element name="TITL" type="line" minOccurs="0"/>
+						<xs:element name="FILE" type="line" minOccurs="0"/>
+						<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="value" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="MultimediaLinkType">
+		<xs:group ref="MultimediaGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="MultimediaLink" type="MultimediaLinkType"/>
+	
+	<xs:element name="OBJE" substitutionGroup="MultimediaLink"/>
+	
+	<xs:group name="ChangeDateStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				CHANGE_DATE:= 
+				n CHAN																	{1:1} 
+					+1 DATE <CHANGE_DATE>												{1:1} 
+						+2 TIME <TIME_VALUE>											{0:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DATE" type="valueline"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="ChangeDateStructureType">
+		<xs:group ref="ChangeDateStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="ChangeDate" type="ChangeDateStructureType"/>
+
+	<xs:element name="CHAN" substitutionGroup="ChangeDate"/>
+	
+	<xs:group name="NoteStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				NOTE_STRUCTURE:= 
+				[ 
+				n NOTE @<XREF:NOTE>@													{1:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+				| 
+				n NOTE [SUBMITTER_TEXT> | <NULL>]										{1:1} 
+					+1 [ CONC | CONT ] <SUBMITTER_TEXT>									{0:M} 
+					+1 <<SOURCE_CITATION>>												{0:M}
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+<!-- 			<xs:element name="NOTE">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element> -->
+			<xs:element name="NOTE">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="CONC" type="valueline"/>
+								<xs:element name="CONT" type="valueline"/>
+								<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="NoteStructureType">
+		<xs:group ref="NoteStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="NoteStructure" type="NoteStructureType"/>
+	
+	<xs:group name="SourceCitationGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				SOURCE_CITATION:=
+				[ 
+				n SOUR @<XREF:SOUR>@    /* pointer to source record */					{1:1} 
+					+1 PAGE <WHERE_WITHIN_SOURCE>										{0:1} 
+					+1 EVEN <EVENT_TYPE_CITED_FROM>										{0:1} 
+						+2 ROLE <ROLE_IN_EVENT>											{0:1} 
+					+1 DATA																{0:1} 
+						+2 DATE <ENTRY_RECORDING_DATE>									{0:1} 
+						+2 TEXT <TEXT_FROM_SOURCE>										{0:M} 
+							+3 [ CONC | CONT ] <TEXT_FROM_SOURCE>						{0:M} 
+					+1 QUAY <CERTAINTY_ASSESSMENT>										{0:1} 
+					+1 <<MULTIMEDIA_LINK>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				|	/* Systems not using source records */ 
+				n SOUR <SOURCE_DESCRIPTION>												{1:1} 
+					+1 [ CONC | CONT ] <SOURCE_DESCRIPTION>								{0:M} 
+					+1 TEXT <TEXT_FROM_SOURCE>											{0:M} 
+						+2 [CONC | CONT ] <TEXT_FROM_SOURCE>							{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				]
+				 --> 
+				<!--
+					Expanded so that the SOUR in the header can be linked rather than included directly. 
+				 -->
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SOUR">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="VERS" type="valueline" minOccurs="0"/>
+								<xs:element name="NAME" type="valueline" minOccurs="0"/>
+								<xs:element name="CORP" type="AddressStructureType" minOccurs="0"/>
+								<xs:element name="PAGE" type="valueline" minOccurs="0"/>
+								<xs:element name="EVEN" minOccurs="0">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="valuestruct">
+												<xs:sequence>
+													<xs:element name="ROLE" type="valueline" minOccurs="0"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="DATA" minOccurs="0">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="struct">
+												<xs:sequence>
+													<xs:element name="DATE" type="valueline" minOccurs="0"/>
+													<xs:element name="COPR" type="valueline" minOccurs="0"/>
+													<xs:element name="TEXT" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="valuestruct">
+																	<xs:sequence>
+																		<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+																		<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+																	</xs:sequence>
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="QUAY" type="valueline" minOccurs="0"/>
+								<xs:element name="OBJE" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="CONC" type="valueline"/>
+								<xs:element name="CONT" type="valueline"/>
+								<xs:element name="TEXT" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="valuestruct">
+												<xs:sequence>
+													<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+													<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+<!-- 			<xs:element name="SOUR">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="CONC" type="valueline"/>
+								<xs:element name="CONT" type="valueline"/>
+								<xs:element name="TEXT" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="valuestruct">
+												<xs:sequence>
+													<xs:element name="CONC" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+													<xs:element name="CONT" type="valueline" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element> -->
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="SourceCitationType">
+		<xs:group ref="SourceCitationGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="SourceCitation" type="SourceCitationType"/>
+	
+	<xs:element name="SOUR" substitutionGroup="SourceCitation"/>
+	
+	<xs:group name="PersonalNameStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				PERSONAL_NAME_STRUCTURE:= 
+				n NAME <NAME_PERSONAL>													{1:1} 
+					+1 NPFX <NAME_PIECE_PREFIX>											{0:1} 
+					+1 GIVN <NAME_PIECE_GIVEN>											{0:1} 
+					+1 NICK <NAME_PIECE_NICKNAME>										{0:1} 
+					+1 SPFX <NAME_PIECE_SURNAME_PREFIX									{0:1} 
+					+1 SURN <NAME_PIECE_SURNAME>										{0:1} 
+					+1 NSFX <NAME_PIECE_SUFFIX>											{0:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NPFX" type="valueline" minOccurs="0"/>
+			<xs:element name="GIVN" type="valueline" minOccurs="0"/>
+			<xs:element name="NICK" type="valueline" minOccurs="0"/>
+			<xs:element name="SPFX" type="valueline" minOccurs="0"/>
+			<xs:element name="SURN" type="valueline" minOccurs="0"/>
+			<xs:element name="NSFX" type="valueline" minOccurs="0"/>
+			<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="PersonalNameStructureType">
+		<xs:group ref="PersonalNameStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="PersonalNameStructure" type="PersonalNameStructureType"/>
+	
+	<xs:group name="IndividualEventStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				INDIVIDUAL_EVENT_STRUCTURE:= 
+				[ 
+				n BIRT [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+					+1 FAMC @<XREF:FAM>@												{0:1} 
+				| 
+				n CHR [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+					+1 FAMC @<XREF:FAM>@												{0:1} 
+				| 
+				n ADOP [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+					+1 FAMC @<XREF:FAM>@												{0:1} 
+						+2 ADOP <ADOPTED_BY_WHICH_PARENT>								{0:1} 
+				| 
+				n DEAT [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n BURI [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n CREM [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n BAPM [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n BARM [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n BASM [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n BLES [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n CHRA [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n CONF [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n FCOM [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n ORDN [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n NATU [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n EMIG [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n IMMI [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n PROB [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n WILL [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n GRAD [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n RETI [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n CENS [Y|<NULL>]													{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n EVEN																	{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="BIRT" type="EventDetailStructureTypeFamc" minOccurs="0"/>
+			<xs:element name="CHR" type="EventDetailStructureTypeFamc" minOccurs="0"/>
+			<xs:element name="ADOP" type="EventDetailStructureTypeAdop" minOccurs="0"/>
+			<xs:element name="DEAT" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="BURI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="CREM" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="BAPM" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="BARM" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="BASM" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="BLES" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="CHRA" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="CONF" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="FCOM" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="ORDN" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="NATU" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="EMIG" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="IMMI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="PROB" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="WILL" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="GRAD" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="RETI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="CENS" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="EVEN" type="EventDetailStructureType" minOccurs="0"/>
+			<xs:element name="_MILT" type="EventDetailStructureTypeY" minOccurs="0"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="IndividualEventStructureType">
+		<xs:group ref="IndividualEventStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="IndividualEventStructure" type="IndividualEventStructureType"/>
+	
+	<xs:group name="EventDetailStructure">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				EVENT_DETAIL:= 
+				n TYPE <EVENT_DESCRIPTOR>												{0:1} 
+				n DATE <DATE_VALUE>														{0:1}
+				n <<PLACE_STRUCTURE>>													{0:1} 
+				n <<ADDRESS_STRUCTURE>>													{0:1} 
+				n AGE <AGE_AT_EVENT>													0:1} 
+				n AGNC <RESPONSIBLE_AGENCY>												{0:1} 
+				n CAUS <CAUSE_OF_EVENT>													{0:1} 
+				n <<SOURCE_CITATION>>													{0:M} 
+				n <<MULTIMEDIA_LINK>>													{0:M}
+				n <<NOTE_STRUCTURE>>													{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TYPE" type="valueline" minOccurs="0"/>
+			<xs:element name="DATE" type="valueline" minOccurs="0"/>
+			<xs:group ref="PlaceStructureGroup" minOccurs="0"/>
+			<xs:group ref="AddressStructureGroup" minOccurs="0"/>
+			<xs:element name="AGE" type="valueline" minOccurs="0"/>
+			<xs:element name="AGNC" type="valueline" minOccurs="0"/>
+			<xs:element name="CAUS" type="valueline" minOccurs="0"/>
+			<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OBJE" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="EventDetailStructureTypeY">
+		<xs:group ref="EventDetailStructure"/>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="EventDetailStructureType">
+		<xs:group ref="EventDetailStructure"/>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="EventDetailStructureTypeFamc">
+		<xs:sequence>
+			<xs:group ref="EventDetailStructure" minOccurs="0"/>
+			<xs:element name="FAMC" type="valueline" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:complexType name="EventDetailStructureTypeAdop">
+		<xs:sequence>
+			<xs:group ref="EventDetailStructure"/>
+			<xs:element name="FAMC" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="ADOP" type="valueline" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:element name="EventDetail" type="EventDetailStructureType"/>
+	
+	<xs:group name="PlaceStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				PLACE_STRUCTURE:= 
+				n PLAC <PLACE_VALUE>													{1:1} 
+					+1 FORM <PLACE_HIERARCHY>											{0:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PLAC" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="FORM" type="valueline" minOccurs="0"/>
+								<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="PlaceStructureGroupType">
+		<xs:group ref="PlaceStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+
+	<xs:element name="PlaceStructure" type="PlaceStructureGroupType"/>
+	
+	<xs:group name="IndividualEventAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				INDIVIDUAL_ATTRIBUTE_STRUCTURE:= 
+				[ 
+				n CAST <CASTE_NAME> 													{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n DSCR <PHYSICAL_DESCRIPTION> 											{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n EDUC <SCHOLASTIC_ACHIEVEMENT> 										{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n IDNO <NATIONAL_ID_NUMBER> 											{1:1}* 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n NATI <NATIONAL_OR_TRIBAL_ORIGIN> 										{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n NCHI <COUNT_OF_CHILDREN> 												{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n NMR <COUNT_OF_MARRIAGES> 												{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n OCCU <OCCUPATION> 													{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n PROP <POSSESSIONS> 													{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n RELI <RELIGIOUS_AFFILIATION> 											{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n RESI 																	{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n SSN <SOCIAL_SECURITY_NUMBER> 											{0:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n TITL <NOBILITY_TYPE_TITLE>											{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="CAST" type="EventDetailStructureTypeFamc" minOccurs="0"/>
+			<xs:element name="DSCR" type="EventDetailStructureTypeFamc" minOccurs="0"/>
+			<xs:element name="EDUC" type="EventDetailStructureTypeAdop" minOccurs="0"/>
+			<xs:element name="IDNO" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="NATI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="NCHI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="NMR" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="OCCU" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="PROP" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="RELI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="RESI" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="SSN" type="EventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="TITL" type="EventDetailStructureTypeY" minOccurs="0"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="IndividualEventAttributeType">
+		<xs:group ref="IndividualEventAttributeGroup"/>
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+
+	<xs:element name="IndividualEventAttribute" type="IndividualEventAttributeType"/>
+	
+	<xs:group name="LDSIndividualOrdinanceGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				LDS_INDIVIDUAL_ORDINANCE:= 
+				[ 
+				n [ BAPL | CONL ] 														{1:1} 
+					+1 STAT <LDS_BAPTISM_DATE_STATUS>									{0:1} 
+					+1 DATE <DATE_LDS_ORD>												{0:1} 
+					+1 TEMP <TEMPLE_CODE>												{0:1} 
+					+1 PLAC <PLACE_LIVING_ORDINANCE>									{0:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				| 
+				n ENDL	{1:1} 
+					+1 STAT <LDS_ENDOWMENT_DATE_STATUS>									{0:1} 
+					+1 DATE <DATE_LDS_ORD>												{0:1} 
+					+1 TEMP <TEMPLE_CODE>												{0:1} 
+					+1 PLAC <PLACE_LIVING_ORDINANCE>									{0:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+				| 
+				n SLGC	{1:1} 
+					+1 STAT <LDS_CHILD_SEALING_DATE_STATUS>								{0:1} 
+					+1 DATE <DATE_LDS_ORD>												{0:1} 
+					+1 TEMP <TEMPLE_CODE>												{0:1} 
+					+1 PLAC <PLACE_LIVING_ORDINANCE>									{0:1} 
+					+1 FAMC @<XREF:FAM>@												{1:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="BAPL" type="LDSIndividualOrdinanceTypeBapl" minOccurs="0"/>
+			<xs:element name="CONL" type="LDSIndividualOrdinanceTypeBapl" minOccurs="0"/>
+			<xs:element name="ENDL" type="LDSIndividualOrdinanceTypeEndl" minOccurs="0"/>
+			<xs:element name="SLGC" type="LDSIndividualOrdinanceTypeSlgc" minOccurs="0"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="LDSIndividualOrdinanceType">
+		<xs:group ref="LDSIndividualOrdinanceGroup"/>
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+
+	<xs:element name="LDSIndividualOrdinance" type="LDSIndividualOrdinanceType"/>
+
+	<xs:complexType name="LDSIndividualOrdinanceTypeBapl">
+		<xs:sequence>
+			<xs:element name="STAT" type="valueline" minOccurs="0"/>
+			<xs:element name="DATE" type="valueline" minOccurs="0"/>
+			<xs:element name="TEMP" type="valueline" minOccurs="0"/>
+			<xs:element name="PLAC" type="valueline" minOccurs="0"/>
+			<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="LDSIndividualOrdinanceTypeEndl">
+		<xs:sequence>
+			<xs:element name="STAT" type="valueline" minOccurs="0"/>
+			<xs:element name="DATE" type="valueline" minOccurs="0"/>
+			<xs:element name="TEMP" type="valueline" minOccurs="0"/>
+			<xs:element name="PLAC" type="valueline" minOccurs="0"/>
+			<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="LDSIndividualOrdinanceTypeSlgc">
+		<xs:sequence>
+			<xs:element name="STAT" type="valueline" minOccurs="0"/>
+			<xs:element name="DATE" type="valueline" minOccurs="0"/>
+			<xs:element name="TEMP" type="valueline" minOccurs="0"/>
+			<xs:element name="PLAC" type="valueline" minOccurs="0"/>
+			<xs:element name="FAMC" type="valueline" minOccurs="0"/>
+			<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:group name="ChildToFamilyLinkGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				CHILD_TO_FAMILY_LINK:= 
+				n FAMC @<XREF:FAM>@														{1:1} 
+					+1 PEDI <PEDIGREE_LINKAGE_TYPE>										{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FAMC" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="PEDI" type="valueline" minOccurs="0"/>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="ChildToFamilyLinkGroupType">
+		<xs:group ref="ChildToFamilyLinkGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="ChildToFamilyLink" type="ChildToFamilyLinkGroupType"/>
+	
+	<xs:group name="SpouseToFamilyLinkGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				SPOUSE_TO_FAMILY_LINK:= 
+				n FAMS @<XREF:FAM>@														{1:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FAMS" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="SpouseToFamilyLinkGroupType">
+		<xs:group ref="SpouseToFamilyLinkGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="SpouseToFamilyLink" type="SpouseToFamilyLinkGroupType"/>
+	
+	<xs:group name="AssociationStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				ASSOCIATION_STRUCTURE:= 
+				n ASSO @<XREF:INDI>@													{0:M} 
+					+1 TYPE <RECORD_TYPE>												{1:1} 
+					+1 RELA <RELATION_IS_DESCRIPTOR>									{1:1} 
+					+1 <<NOTE_STRUCTURE>>												{0:M} 
+					+1 <<SOURCE_CITATION>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ASSO" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="TYPE" type="valueline" minOccurs="0"/>
+								<xs:element name="RELA" type="valueline" minOccurs="0"/>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="AssociationStructureGroupType">
+		<xs:group ref="AssociationStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="AssociationStructure" type="AssociationStructureGroupType"/>
+	
+	<xs:group name="FamilyEventStructureGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				FAMILY_EVENT_STRUCTURE:= 
+				[ 
+				n ANUL [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n DIV [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n DIVF [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n ENGA [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n MARR [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n MARB [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n MARC [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n MARL [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n MARS [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n CENS [Y|<NULL>]														{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				| 
+				n EVEN																	{1:1} 
+					+1 <<EVENT_DETAIL>>													{0:1} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="ANUL" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="DIV" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="DIVF" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="MARR" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="MARB" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="MARC" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="MARL" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="MARS" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="CENS" type="FamilyEventDetailStructureTypeY" minOccurs="0"/>
+			<xs:element name="EVEN" type="FamilyEventDetailStructureType" minOccurs="0"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="FamilyEventStructureType">
+		<xs:group ref="FamilyEventStructureGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="FamilyEventStructure" type="FamilyEventStructureType"/>
+	
+	<xs:complexType name="FamilyEventDetailStructureType">
+		<xs:sequence>
+			<xs:group ref="EventDetailStructure" minOccurs="0"/>
+			<xs:element name="HUSB" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="idstruct">
+							<xs:sequence>
+								<xs:element name="age" type="valueline" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="WIFE" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="idstruct">
+							<xs:sequence>
+								<xs:element name="age" type="valueline" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="FamilyEventDetailStructureTypeY">
+		<xs:sequence>
+			<xs:group ref="EventDetailStructure" minOccurs="0"/>
+			<xs:element name="HUSB" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="idstruct">
+							<xs:sequence>
+								<xs:element name="age" type="valueline" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="WIFE" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="idstruct">
+							<xs:sequence>
+								<xs:element name="age" type="valueline" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:element name="FamilyEventDetailY" type="FamilyEventDetailStructureTypeY"/>
+
+	<xs:element name="FamilyEventDetail" type="FamilyEventDetailStructureType"/>
+	
+	<xs:group name="LDSSpouseSealingGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<!--
+				LDS_SPOUSE_SEALING:= 
+				n SLGS	{1:1} 
+					+1 STAT <LDS_SPOUSE_SEALING_DATE_STATUS>							{0:1} 
+					+1 DATE <DATE_LDS_ORD>												{0:1} 
+					+1 TEMP <TEMPLE_CODE>												{0:1} 
+					+1 PLAC <PLACE_LIVING_ORDINANCE>									{0:1} 
+					+1 <<SOURCE_CITATION>>												{0:M} 
+					+1 <<NOTE_STRUCTURE>>												{0:M}
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FAMS" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="valuestruct">
+							<xs:sequence>
+								<xs:element name="STAT" type="valueline" minOccurs="0"/>
+								<xs:element name="DATE" type="valueline" minOccurs="0"/>
+								<xs:element name="TEMP" type="valueline" minOccurs="0"/>
+								<xs:element name="PLAC" type="valueline" minOccurs="0"/>
+								<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="LDSSpouseSealingGroupType">
+		<xs:group ref="LDSSpouseSealingGroup"/>
+		<xs:attribute name="value" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="LDSSpouseSealing" type="LDSSpouseSealingGroupType"/>
+
+	<xs:element name="PLAC">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="struct">
+					<xs:sequence>
+						<xs:element name="FORM" type="valueline"/>
+						<xs:element name="SOUR" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="NOTE" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

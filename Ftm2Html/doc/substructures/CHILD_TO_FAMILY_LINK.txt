@@ -1,0 +1,4 @@
+CHILD_TO_FAMILY_LINK:= 
+n FAMC @<XREF:FAM>@														{1:1} 
+	+1 PEDI <PEDIGREE_LINKAGE_TYPE>										{0:M} 
+	+1 <<NOTE_STRUCTURE>>												{0:M}

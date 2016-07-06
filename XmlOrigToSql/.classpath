@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
+	<classpathentry kind="lib" path="C:/EclipseProjects/Apache/xerces-bin-2_9_1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-contrib-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-examples-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-ooxml-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-ooxml-schemas-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/poi-scratchpad-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/poi-3.6/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/javax.xml.bind_2.0.0.v20080604-1500.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.1.0 - Helios"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -1,0 +1,5 @@
+AUTOMATED_RECORD_ID:=	{Size=1:12} 
+
+A unique record identification number assigned to the record by the source 
+system.  This number is intended to serve as a more sure means of 
+identification of a record between two interfacing systems.

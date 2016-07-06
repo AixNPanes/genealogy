@@ -1,0 +1,1749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings 
+		version="2.0" 
+		xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<named-query name="getXlsPlaceName">
+		<query>
+			<![CDATA[
+				SELECT 
+					n
+				FROM 
+					XlsPlaceName n
+				WHERE LOWER(:name) = LOWER(n.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					co 
+				FROM 
+					Country co 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCountryAlias">
+		<query>
+			<![CDATA[
+				SELECT coa 
+				FROM CountryAlias coa 
+				WHERE LOWER(:name) = LOWER(coa.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					co 
+				FROM 
+					Country co 
+				WHERE 
+					LOWER(:name) = LOWER(co.name)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountryForAbbreviation">
+		<query>
+			<![CDATA[
+				SELECT 
+					c 
+				FROM 
+					Country c 
+				WHERE 
+					LOWER(c.abbrev) = LOWER(:abbrev)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountryFromCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					ct
+				FROM 
+					Country ct 
+				WHERE 
+						LOWER(:country) = LOWER(ct.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getState">
+		<query>
+			<![CDATA[
+				SELECT 
+					st 
+				FROM 
+					State st 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findState">
+		<query>
+			<![CDATA[
+				SELECT 
+					st 
+				FROM 
+					State st 
+				WHERE 
+					LOWER(:name) = LOWER(st.name)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getStateAlias">
+		<query>
+			<![CDATA[
+				SELECT sta 
+				FROM StateAlias sta 
+				WHERE LOWER(:name) = LOWER(sta.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findStateFromState">
+		<query>
+			<![CDATA[
+				SELECT 
+					st
+				FROM 
+					State st 
+				WHERE 
+						LOWER(:state) = LOWER(st.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findStateFromStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					st
+				FROM 
+					State st 
+				WHERE 
+						LOWER(:state) = LOWER(st.name) 
+					and LOWER(:country) = LOWER(st.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					cnty 
+				FROM 
+					County cnty 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCountyAlias">
+		<query>
+			<![CDATA[
+				SELECT 
+					cntya 
+				FROM 
+					CountyAlias cntya 
+				WHERE LOWER(:name) = LOWER(cntya.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					cty
+				FROM 
+					County cty 
+				WHERE 
+					LOWER(:name) = LOWER(cty.name)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountyFromAlias">
+		<query>
+			<![CDATA[
+				SELECT 
+					cty 
+				FROM 
+					County cty 
+				WHERE 
+						LOWER(:name) = LOWER(cty.abbrev) 
+					or LOWER(:name) = LOWER(cty.name) 
+			]]>
+			<!-- 
+					or LOWER(:name) = LOWER(:alias) 
+					or LOWER(:alias) = LOWER(cty.countyAliases.alias)
+			 -->
+		</query>
+	</named-query>
+	<named-query name="findCountyFromCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					co
+				FROM 
+					County co 
+				WHERE 
+						LOWER(:county) = LOWER(co.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountyFromCountyAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					co
+				FROM 
+					County co 
+				WHERE 
+						LOWER(:county) = LOWER(co.name) 
+					and LOWER(:state) = LOWER(co.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountyFromCountyAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					co
+				FROM 
+					County co 
+				WHERE 
+						LOWER(:county) = LOWER(co.name) 
+					and LOWER(:country) = LOWER(co.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCountyFromCountyAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					co
+				FROM 
+					County co 
+				WHERE 
+						LOWER(:county) = LOWER(co.name) 
+					and LOWER(:state) = LOWER(co.state.name) 
+					and LOWER(:country) = LOWER(co.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCity">
+		<query>
+			<![CDATA[
+				SELECT 
+					cty 
+				FROM 
+					City cty 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getCityAlias">
+		<query>
+			<![CDATA[
+				SELECT 
+					ctya 
+				FROM 
+					CityAlias ctya 
+				WHERE LOWER(:name) = LOWER(ctya.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCity">
+		<query>
+			<![CDATA[
+				SELECT 
+					cy
+				FROM 
+					City cy 
+				WHERE 
+					LOWER(:name) = LOWER(cy.name)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCity">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:county) = LOWER(ci.county.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:state) = LOWER(ci.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:country) = LOWER(ci.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndCountyAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:county) = LOWER(ci.county.name) 
+					and LOWER(:state) = LOWER(ci.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndCountyAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:county) = LOWER(ci.county.name) 
+					and LOWER(:country) = LOWER(ci.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:state) = LOWER(ci.state.name) 
+					and LOWER(:country) = LOWER(ci.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findCityFromCityAndCountyAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					ci
+				FROM 
+					City ci 
+				WHERE 
+						LOWER(:city) = LOWER(ci.name) 
+					and LOWER(:county) = LOWER(ci.county.name) 
+					and LOWER(:state) = LOWER(ci.state.name) 
+					and LOWER(:country) = LOWER(ci.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getLocale">
+		<query>
+			<![CDATA[
+				SELECT 
+					lcl 
+				FROM 
+					Locale lcl 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocale">
+		<query>
+			<![CDATA[
+				SELECT 
+					lcl 
+				FROM 
+					Locale lcl 
+				WHERE 
+					LOWER(:name) = LOWER(lcl.name)
+			]]>
+		</query>
+	</named-query>
+	<named-query name="getLocaleAlias">
+		<query>
+			<![CDATA[
+				SELECT 
+					lcla 
+				FROM 
+					LocaleAlias lcla 
+				WHERE LOWER(:name) = LOWER(lcla.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocale">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCity">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndCounty">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCountyAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCountyAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndCountyAndState">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndCountyAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCountyAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findLocaleFromLocaleAndCityAndCountyAndStateAndCountry">
+		<query>
+			<![CDATA[
+				SELECT 
+					lo 
+				FROM 
+					Locale lo 
+				WHERE 
+						LOWER(:locale) = LOWER(lo.name) 
+					and LOWER(:city) = LOWER(lo.city.name) 
+					and LOWER(:county) = LOWER(lo.county.name) 
+					and LOWER(:state) = LOWER(lo.state.name) 
+					and LOWER(:country) = LOWER(lo.country.name) 
+			]]>
+		</query>
+	</named-query>
+	<named-query name="findFixup">
+   	    <query>
+   	    	<![CDATA[
+   	    		SELECT 
+   	    			f 
+   	    		FROM 
+   	    			Fixup f 
+   	    		WHERE 
+   	    			LOWER(f.name) = LOWER(:name)
+   	    	]]>
+   	    </query>
+	</named-query>
+	<named-query name="findPlace">
+   	    <query>
+   	    	<![CDATA[
+   	    		SELECT 
+   	    			p
+   	    		FROM 
+   	    			Place p 
+   	    		WHERE 
+   	    			LOWER(p.name) = LOWER(:name)
+   	    	]]>
+   	    </query>
+	</named-query>
+	<mapped-superclass class="ws.daley.genealogy.db.places.abstrct.PlaceAlias">
+		<attributes>
+			<id name="type"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.abstrct.PlaceId">
+		<attributes>
+			<id name="id"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.abstrct.PlaceName">
+		<attributes>
+			<basic name="name"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.abstrct.PlaceType">
+		<attributes>
+			<basic name="type"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.places.abstrct.PlaceStructure">
+		<attributes>
+			<basic name="abbrev"/>
+			<one-to-many name="urls" target-entity="ws.daley.genealogy.db.places.PlaceURL">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<transient name="element"/>
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ws.daley.genealogy.db.record.GedRecord">
+		<attributes>
+			<basic name="recordLevel">
+				<column name="recordLevel" length="3"/>
+			</basic>
+			<basic name="recordId">
+				<column name="recordId" length="10"/>
+			</basic>
+			<basic name="recordType">
+				<column name="recordType" length="20"/>
+			</basic>
+			<basic name="recordValue">
+				<lob/>
+			</basic>
+		</attributes>
+	</mapped-superclass>
+ 	<mapped-superclass class="ws.daley.genealogy.db.record.SubRecord">
+		<attributes>
+			<id name="recordKey">
+				<column name="recordKey" length="10"/>
+			</id>
+		</attributes>
+	</mapped-superclass>
+	<entity class="ws.daley.genealogy.db.xls.XlsPlaceName">
+		<table name="xlsplaceName"/>
+		<attributes>
+			<id name="name"/>
+			<many-to-one name="place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.xls.XlsPlace">
+		<table name="xlsplace"/>
+		<attributes>
+			<id name="id"/>
+			<basic name="country"/>
+			<basic name="state"/>
+			<basic name="county"/>
+			<basic name="city"/>
+			<basic name="locale1"/>
+			<basic name="locale2"/>
+			<basic name="locale3"/>
+			<one-to-many name="names" mapped-by="place" target-entity="ws.daley.genealogy.db.xls.XlsPlaceName">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="urls" mapped-by="xlsPlace" target-entity="ws.daley.genealogy.db.xls.XlsUrl">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.xls.XlsUrl">
+		<table name="xlsurl"/>
+		<attributes>
+			<id name="id"/>
+			<basic name="type"/>
+			<basic name="url">
+				<lob/>
+			</basic>
+			<many-to-one name="xlsPlace">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.Gedcom55">
+		<table name="Gedcom55"/>
+		<attributes>
+			<one-to-many name="familyRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.FamilyRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="individualRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.IndividualRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="submitterRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.SubmitterRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.NoteRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.SourceRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="repositoryRecords" mapped-by="gedcom55" target-entity="ws.daley.genealogy.db.record.RepositoryRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="headerRecord" target-entity="ws.daley.genealogy.db.record.HeaderRecord">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="trailerRecord"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.City">
+		<table name="City"/>
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county" target-entity="ws.daley.genealogy.db.places.County">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.CompositePlace">
+		<table name="CompositePlace"/>
+		<attributes>
+			<id name="placeKey"/>
+			<basic name="url1"/>
+			<basic name="url2"/>
+			<basic name="url3"/>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county" target-entity="ws.daley.genealogy.db.places.County">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city" target-entity="ws.daley.genealogy.db.places.City">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="locale" target-entity="ws.daley.genealogy.db.places.Locale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="element"/>
+			<transient name="elementIndex"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Country">
+		<table name="Country"/>
+		<attributes>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.alias.CountryAlias">
+		<table name="CountryAlias"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.County">
+		<table name="County"/>
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.alias.CountyAlias">
+		<table name="CountyAlias"/>
+		<attributes>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.places.County">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.alias.CityAlias">
+		<table name="CityAlias"/>
+		<attributes>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.places.City">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.alias.LocaleAlias">
+		<table name="LocaleAlias"/>
+		<attributes>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.places.Locale">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Fixup">
+		<table name="Fixup"/>
+		<attributes>
+			<id name="name"/>
+			<basic name="fixup"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Locale">
+		<table name="Locale"/>
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="state" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="county" target-entity="ws.daley.genealogy.db.places.County">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="city" target-entity="ws.daley.genealogy.db.places.City">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.Place">
+		<table name="Place"/>
+		<attributes>
+			<id name="name"/>
+			<one-to-many name="urls" target-entity="ws.daley.genealogy.db.places.URL">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="parent" target-entity="ws.daley.genealogy.db.places.Place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<transient name="element"/>
+			<transient name="parentElement"/>
+			<transient name="parentName"/>
+			<transient name="persisted"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.PlaceURL">
+		<table name="PlaceURL"/>
+		<attributes>
+			<basic name="url"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.State">
+		<table name="State"/>
+		<attributes>
+			<one-to-one name="country" target-entity="ws.daley.genealogy.db.places.Country">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.alias.StateAlias">
+		<table name="StateAlias"/>
+		<attributes>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.places.State">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.URL">
+		<table name="URL"/>
+		<attributes>
+			<id name="id"/>
+			<basic name="name"/>
+			<basic name="title">
+				<lob/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.places.URLType">
+		<table name="URLType"/>
+		<attributes>
+			<basic name="name"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.DataRecord">
+		<table name="DataRecord"/>
+		<attributes>
+			<many-to-one name="parent">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="contains" mapped-by="parent">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.FamilyRecord">
+		<table name="FamilyRecord"/>
+		<attributes>
+			<basic name="husband"/>
+			<basic name="wife"/>
+			<basic name="numberOfChildren"/>
+			<basic name="automatedRecordId"/>
+			<basic name="changeDate"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="submitters" target-entity="ws.daley.genealogy.db.structure.SubmitterStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="events" target-entity="ws.daley.genealogy.db.structure.event.family.FamilyEventStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="children" target-entity="ws.daley.genealogy.db.structure.ChildLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ldsSpouseSealings" target-entity="ws.daley.genealogy.db.structure.LDSSpouseSealingStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumbers" target-entity="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceCitations" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLinks" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.HeaderRecord">
+		<table name="HeaderRecord"/>
+		<attributes>
+			<basic name="destination"/>
+			<basic name="submitter"/>
+			<basic name="submission"/>
+			<basic name="file"/>
+			<basic name="copyright"/>
+			<basic name="language"/>
+			<basic name="characterSet"/>
+			<basic name="date"/>
+			<basic name="placeHierarchy"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-one name="headerSourceStructure" target-entity="ws.daley.genealogy.db.structure.header.HeaderSourceStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<embedded name="headerGedcomContentDescriptionStructure"/>
+			<embedded name="headerGedcomStructure"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.IndividualRecord">
+		<table name="IndividualRecord"/>
+		<attributes>
+			<basic name="restrictionNotice"/>
+			<basic name="sex"/>
+			<basic name="recordFileNumber"/>
+			<basic name="ancestralFileNumber"/>
+			<basic name="automatedRecordId"/>
+			<basic name="alias"/>
+			<basic name="changeDate"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="submitters" target-entity="ws.daley.genealogy.db.structure.SubmitterStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumbers" target-entity="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="childToFamilyLinks" target-entity="ws.daley.genealogy.db.structure.ChildToFamilyLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="spouseToFamilyLinks" target-entity="ws.daley.genealogy.db.structure.SpouseToFamilyLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="aliasToIndividualLinks" target-entity="ws.daley.genealogy.db.structure.AliasToIndividualLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ancestorToIndividualLinks" target-entity="ws.daley.genealogy.db.structure.AncestorToIndividualLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="descendentToIndividualLinks" target-entity="ws.daley.genealogy.db.structure.DescendentToIndividualLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceCitations" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLinks" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="associationStructures" target-entity="ws.daley.genealogy.db.structure.AssociationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="ldsIndividualOrdinances" target-entity="ws.daley.genealogy.db.structure.LDSIndividualOrdinanceStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="events" target-entity="ws.daley.genealogy.db.structure.event.individual.IndividualEventStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="attributes" target-entity="ws.daley.genealogy.db.structure.attribute.individual.IndividualAttributeStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="personalNameStructures" target-entity="ws.daley.genealogy.db.structure.PersonalNameStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+ 		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.NoteRecord">
+		<table name="NoteRecord"/>
+		<attributes>
+			<basic name="automatedRecordId"/>
+			<basic name="changeDate"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumberStructures" target-entity="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.RepositoryRecord">
+		<table name="RepoRecord"/>
+		<attributes>
+			<basic name="automatedRecordId"/>
+			<basic name="nameOfRepository"/>
+			<basic name="changeDate"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumberStructures" target-entity="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<embedded name="addressStructure"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.SourceRecord">
+		<table name="SourceRecord"/>
+		<attributes>
+			<basic name="automatedRecordId"/>
+			<basic name="filedByEntry"/>
+			<basic name="changeDate"/>
+			<basic name="originator"/>
+			<basic name="title"/>
+			<basic name="publicationFacts"/>
+			<basic name="textFromSource"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="multimediaLinkStructures" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="userReferenceNumberStructures" target-entity="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="sourceDataStructure" target-entity="ws.daley.genealogy.db.structure.source.SourceDataStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="sourceRepositoryCitationStructure" target-entity="ws.daley.genealogy.db.structure.source.SourceRepoCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.SubmitterRecord">
+		<table name="SubmitterRecord"/>
+		<attributes>
+			<basic name="automatedRecordId"/>
+			<basic name="changeDate"/>
+			<basic name="submitterName"/>
+			<basic name="submitterRegisteredRFN"/>
+			<basic name="submitterLanguagePreference1"/>
+			<basic name="submitterLanguagePreference2"/>
+			<basic name="submitterLanguagePreference3"/>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+			<one-to-many name="multimediaLinkStructures" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<embedded name="addressStructure"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.record.TrailerRecord">
+		<table name="TrailerRecord"/>
+		<attributes>
+			<many-to-one name="gedcom55">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.AliasToIndividualLinkStructure">
+		<table name="AliasToIndividualLinkStructure"/>
+		<attributes>
+			<id name="recordKey">
+				<column name="recordKey" length="10"/>
+			</id>
+			<basic name="aliasToIndividualLink"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.AncestorToIndividualLinkStructure">
+		<table name="AncestorToIndividualLinkStructure"/>
+		<attributes>
+			<id name="recordKey">
+				<column name="recordKey" length="10"/>
+			</id>
+			<basic name="ancestorToIndividualLink"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.AssociationStructure">
+		<table name="AssociationStructure"/>
+		<attributes>
+			<basic name="recordType"/>
+			<basic name="relation"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.ChildLinkStructure">
+		<table name="ChildLinkStructure"/>
+		<attributes>
+			<basic name="fatherRelationship"/>
+			<basic name="motherRelationship"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.ChildToFamilyLinkStructure">
+		<table name="ChildToFamilyLinkStructure"/>
+		<attributes>
+			<one-to-many name="pedigreeLinkageTypeStructures" target-entity="ws.daley.genealogy.db.structure.PedigreeLinkageTypeStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.DescendentToIndividualLinkStructure">
+		<table name="DescendentToIndividualLinkStructure"/>
+		<attributes>
+			<id name="recordKey">
+				<column name="recordKey" length="10"/>
+			</id>
+			<basic name="descendentToIndividualLink"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.LDSIndividualOrdinanceStructure">
+		<table name="LDSIndividualOrdinanceStructure"/>
+		<attributes>
+			<basic name="ordinanceType"/>
+			<basic name="dateStatus"/>
+			<basic name="date"/>
+			<basic name="templeCode"/>
+			<basic name="place"/>
+			<basic name="famc"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.LDSSpouseSealingStructure">
+		<table name="LDSSpouseSealingStructure"/>
+		<attributes>
+			<basic name="dateStatus"/>
+			<basic name="date"/>
+			<basic name="templeCode"/>
+			<basic name="place"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+		<table name="MultimediaLinkStructure"/>
+		<attributes>
+			<basic name="format"/>
+			<basic name="title"/>
+			<basic name="fileReference"/>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.NoteStructure">
+		<table name="NoteStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.PedigreeLinkageTypeStructure">
+		<table name="PedigreeLinkageTypeStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.PersonalNameStructure">
+		<table name="PersonalNameStructure"/>
+		<attributes>
+			<basic name="prefix"/>
+			<basic name="given"/>
+			<basic name="nickname"/>
+			<basic name="surnamePrefix"/>
+			<basic name="surname"/>
+			<basic name="suffix"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.PlaceStructure">
+		<table name="PlaceStructure"/>
+		<attributes>
+			<basic name="form"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="place" target-entity="ws.daley.genealogy.db.places.Place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.SpouseToFamilyLinkStructure">
+		<table name="SpouseToFamilyLinkStructure"/>
+		<attributes>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.SourceCitationStructure">
+		<table name="SourceCitationStructure"/>
+		<attributes>
+			<basic name="page"/>
+			<basic name="quay"/>
+			<basic name="text"/>
+			<basic name="footer"/>
+			<one-to-many name="multimediaLinkStructures" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="sourceCitationEventStructure" target-entity="ws.daley.genealogy.db.structure.sourcecitation.SourceCitationEventStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<one-to-one name="sourceCitationDataStructure" target-entity="ws.daley.genealogy.db.structure.sourcecitation.SourceCitationDataStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.SubmitterStructure">
+		<table name="SubmitterStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.UserReferenceNumberStructure">
+		<table name="userReferenceNumberStructure"/>
+		<attributes>
+			<basic name="userReferenceType"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.address.AddressEmailStructure">
+		<table name="AddressEmailStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.address.AddressFaxStructure">
+		<table name="AddressFaxStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.address.AddressWWWStructure">
+		<table name="AddressWWWStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.address.PhoneNumberStructure">
+		<table name="PhoneNumberStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.attribute.individual.IndividualAttributeStructure">
+		<table name="IndividualAttributeStructure"/>
+		<attributes>
+			<basic name="attributeType"/>
+			<one-to-one name="eventDetail" target-entity="ws.daley.genealogy.db.structure.event.EventDetailStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.event.EventDetailStructure">
+		<table name="EventDetailStructure"/>
+		<attributes>
+			<basic name="eventDescriptor"/>
+			<basic name="date"/>
+			<basic name="age"/>
+			<basic name="responsibleAgency"/>
+			<basic name="causeOfEvent"/>
+			<one-to-many name="sourceCitationStructures" target-entity="ws.daley.genealogy.db.structure.SourceCitationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="multimediaLinkStructures" target-entity="ws.daley.genealogy.db.structure.MultimediaLinkStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-one name="placeStructure" target-entity="ws.daley.genealogy.db.structure.PlaceStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<embedded name="addressStructure"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.event.family.FamilyEventStructure">
+		<table name="familyEventStructure"/>
+		<attributes>
+			<basic name="eventType"/>
+			<one-to-one name="eventDetail" target-entity="ws.daley.genealogy.db.structure.event.EventDetailStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.event.individual.IndividualEventStructure">
+		<table name="IndividualEventStructure"/>
+		<attributes>
+			<basic name="eventType"/>
+			<basic name="famc"/>
+			<one-to-one name="eventDetail" target-entity="ws.daley.genealogy.db.structure.event.EventDetailStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.header.HeaderCharacterSetStructure">
+		<table name="HeaderCharacterSetStructure"/>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.header.HeaderDateStructure">
+		<table name="HeaderDateStructure"/>
+		<attributes>
+			<basic name="dateTime"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.header.HeaderPlaceHierarchyStructure">
+		<table name="HeaderPlaceHierarchyStructure"/>
+		<attributes>
+			<basic name="form"/>
+			<one-to-one name="place">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.header.HeaderSourceStructure">
+		<table name="HeaderSourceStructure"/>
+		<attributes>
+			<basic name="headerSourceName"/>
+			<basic name="headerSourceVersion"/>
+			<one-to-one name="headerSourceCorporationStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-one>
+			<embedded name="headerSourceDataStructure"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.header.source.HeaderSourceCorporationStructure">
+		<attributes>
+			<basic name="headerSourceCorporation"/>
+			<embedded name="headerSourceCorporationAddress"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.source.SourceDataStructure">
+		<table name="SourceDataStructure"/>
+		<attributes>
+			<basic name="responsibleAgency"/>
+			<one-to-many name="sourceDataEventsRecordedStructures" target-entity="ws.daley.genealogy.db.structure.source.data.SourceDataEventsRecordedStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.source.SourceRepoCitationStructure">
+		<table name="SourceRepoCitationStructure"/>
+		<attributes>
+			<one-to-many name="noteStructures" target-entity="ws.daley.genealogy.db.structure.NoteStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+			<one-to-many name="sourceRepositoryCallNumberStructures" target-entity="ws.daley.genealogy.db.structure.source.repo.SourceRepoCallNumberStructure">
+				<cascade>
+					<cascade-persist/>
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.source.data.SourceDataEventsRecordedStructure">
+		<table name="SourceDataEventsRecordedStructure"/>
+		<attributes>
+			<basic name="date"/>
+			<basic name="jurisdictionPlace"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.source.repo.SourceRepoCallNumberStructure">
+		<table name="SourceRepoCallNumberStructure"/>
+		<attributes>
+			<basic name="sourceMediaType"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.sourcecitation.SourceCitationDataStructure">
+		<table name="SourceCitationDataStructure"/>
+		<attributes>
+			<basic name="date"/>
+			<basic name="text">
+				<lob/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.sourcecitation.SourceCitationEventStructure">
+		<table name="SourceCitationEventStructure"/>
+		<attributes>
+			<basic name="role"/>
+		</attributes>
+	</entity>
+	<entity class="ws.daley.genealogy.db.structure.sourcecitation.data.SourceCitationDataTextStructure">
+		<table name="SourceCitationDataTextStructure"/>
+	</entity>
+	<embeddable class="ws.daley.genealogy.db.structure.AddressStructure">
+		<attributes>
+			<basic name="addressLine"/>
+			<basic name="addressLine1"/>
+			<basic name="addressLine2"/>
+			<basic name="addressLine3"/>
+			<basic name="addressCity"/>
+			<basic name="addressState"/>
+			<basic name="addressPostalCode"/>
+			<basic name="addressCountry"/>
+			<basic name="phoneNumber1"/>
+			<basic name="phoneNumber2"/>
+			<basic name="phoneNumber3"/>
+			<basic name="addressEmail1"/>
+			<basic name="addressEmail2"/>
+			<basic name="addressEmail3"/>
+			<basic name="addressFax1"/>
+			<basic name="addressFax2"/>
+			<basic name="addressFax3"/>
+			<basic name="addressWWW1"/>
+			<basic name="addressWWW2"/>
+			<basic name="addressWWW3"/>
+		</attributes>
+	</embeddable>
+	<embeddable class="ws.daley.genealogy.db.structure.header.HeaderGedcomContentDescriptionStructure">
+		<attributes>
+			<basic name="headerGedcomContentDescription"/>
+		</attributes>
+	</embeddable>
+	<embeddable class="ws.daley.genealogy.db.structure.header.HeaderGedcomStructure">
+		<attributes>
+			<basic name="format"/>
+			<basic name="version"/>
+		</attributes>
+	</embeddable>
+	<embeddable class="ws.daley.genealogy.db.structure.header.source.HeaderSourceDataStructure">
+		<attributes>
+			<basic name="headerSourceDataValue"/>
+			<basic name="headerSourceDataDate"/>
+			<basic name="headerSourceDataCopyright"/>
+		</attributes>
+	</embeddable>
+</entity-mappings>

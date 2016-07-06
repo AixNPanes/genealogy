@@ -1,0 +1,4 @@
+OCCUPATION:=	{Size=1:90} 
+
+The kind of activity that an individual does for a job, profession, or 
+principal activity.

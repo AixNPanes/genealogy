@@ -1,0 +1,8 @@
+PLACE_VALUE:=	{Size=1:120} 
+[ <TEXT> | <TEXT>, <PLACE_VALUE> ]
+
+The jurisdictional name of the place where the event took place. Jurisdictions 
+are separated by commas, for example, "Cove, Cache, Utah, USA." If the actual 
+jurisdictional names of these places have been identified, they can be shown 
+using a PLAC.FORM structure either in the HEADER or in the event structure. 
+(See <PLACE_HIERARCHY>, page 53.)

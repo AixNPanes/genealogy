@@ -1,0 +1,4 @@
+SOURCE_FILED_BY_ENTRY:=	{Size= 1:60} 
+
+This entry is to provide a short title used for sorting, filing, and 
+retrieving source records.

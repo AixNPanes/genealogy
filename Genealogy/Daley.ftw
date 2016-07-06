@@ -1,0 +1,24 @@
+{
+	"homeIndividual":"ID7",
+	"currentIndividual":"ID112",
+	"individuals": {
+		"ID7": {
+			"id":7,
+			"firstName":"Tim",
+			"middleName":"Eugene",
+			"surname":"Daley",
+			"birth":"05 Nov 1948",
+			"death":"",
+			"sex":"male"
+		},
+		"ID112": {
+			"id":112,
+			"firstName":"Judy",
+			"middleName":"Marie",
+			"surname":"Campbell",
+			"birth":"25 Dec 1947",
+			"death":"",
+			"sex":"female"
+		}
+	}
+}

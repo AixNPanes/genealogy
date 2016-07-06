@@ -1,0 +1,2 @@
+DATE_JULN:=	{Size=4:35} 
+[ <YEAR> | <MONTH> <YEAR> | <DAY> <MONTH> <YEAR> ]

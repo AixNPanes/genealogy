@@ -1,0 +1,3 @@
+SUBMITTER_NAME:=	{Size=1:60} 
+
+The name of the submitter formatted for display and address generation.

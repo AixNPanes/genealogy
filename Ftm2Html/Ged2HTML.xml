@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<project name="Ged2HTML" default="xml" basedir=".">
+	<property name="name" value="daley"/>
+	<property name="gedext" value=".ged"/>
+	<property name="geddir"  value="c:/users/tim.daley/documents/genealogy/"/>
+	<property name="ged2xmldir"  value="C:/EclipseProjects/Ged2XML-1.4/"/>
+	<property name="xmlext"  value=".xml"/>
+	  
+	<target name="copy">
+		<copy file="${geddir}${name}${gedext}" tofile="${name}${gedext}"/>
+	</target>
+	
+	<target name="xml" depends="copy">
+		<!-- convert GEDCOM file to XML -->
+		<exec executable="${ged2xmldir}GED2XML.exe" 
+				output="${name}.out" 
+				error="${name}.err"
+				newenvironment="yes"
+				searchpath="yes">
+			<env key="PATH" path="${env.PATH}:${ged2xmldir}"/>
+			<arg value="-n"/>
+			<arg value="-t"/>
+			<arg value="${name}${gedext}"/>
+			<arg value="${name}${xmlext}"/>
+		</exec>
+	</target>
+</project>

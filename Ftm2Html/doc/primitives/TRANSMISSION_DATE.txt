@@ -1,0 +1,4 @@
+TRANSMISSION_DATE:=	{Size=10:11} 
+<DATE_EXACT> 
+
+The date that this transmission was created.

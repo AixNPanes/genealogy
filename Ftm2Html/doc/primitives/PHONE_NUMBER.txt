@@ -1,0 +1,3 @@
+PHONE_NUMBER:=	{Size=1:25} 
+
+A phone number.

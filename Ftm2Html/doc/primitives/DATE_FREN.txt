@@ -1,0 +1,4 @@
+DATE_FREN:=	{Size=4:35} 
+[ <YEAR> | <MONTH_FREN> <YEAR> | <DAY> <MONTH_FREN> <YEAR> ]
+
+See <MONTH_FREN>

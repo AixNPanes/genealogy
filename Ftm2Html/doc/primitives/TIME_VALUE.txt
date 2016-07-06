@@ -1,0 +1,8 @@
+TIME_VALUE:=	{Size=1:12} 
+[ hh:mm:ss.fs ] 
+
+The time of a specific event, usually a computer-timed event, where:
+hh = hours on a 24-hour clock 
+mm = minutes 
+ss	= seconds (optional) 
+fs	= decimal fraction of a second (optional)

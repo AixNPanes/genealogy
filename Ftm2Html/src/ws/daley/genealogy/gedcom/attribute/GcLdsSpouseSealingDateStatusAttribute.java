@@ -1,0 +1,28 @@
+package ws.daley.genealogy.gedcom.attribute;
+
+/**
+ * LDS_SPOUSE_SEALING_DATE_STATUS:=	{Size=3:10} 
+ * [ CANCELED | CLEARED | COMPLETED | DNS | DNS/CAN | PRE-1970 |  QUALIFIED 
+ * | SUBMITTED | UNCLEARED ]
+ * 
+ * CANCELED	= Canceled and considered invalid.
+ * CLEARED	= Sealing has been cleared for temple ordinance.
+ * COMPLETED = Completed but the date is not known.
+ * DNS	= This record is not being submitted for this temple ordinances.
+ * DNS/CAN	= This record is not being submitted for this temple ordinances.
+ * QUALIFIED	= Ordinance request qualified by authorized criteria.
+ * PRE-1970	= (See pre-1970 under LDS_BAPTISM_DATE_STATUS on page 48.) 
+ * SUBMITTED	= Ordinance was previously submitted.
+ * UNCLEARED = Data for clearing ordinance request was insufficient.
+ */
+
+public class GcLdsSpouseSealingDateStatusAttribute extends Gc_Attribute
+{
+	public static AttributeDescriptorMap map = new AttributeDescriptorMap();
+	
+	static{
+		map = AttributeDescriptorMap.newFromArray(new AttributeDescriptor[]{
+				new AttributeDescriptor("LDS_SPOUSE_SEALING_DATE_STATUS", 3, 10, GcLdsSpouseSealingDateStatusAttribute.class),
+		});
+	}
+}

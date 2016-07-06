@@ -1,0 +1,4 @@
+NAME_PIECE_GIVEN:= {Size=1:120} 
+[ <NAME_PIECE> | <NAME_PIECE_GIVEN>, <NAME_PIECE> ] 
+
+Given name or earned name. Different given names are separated by a comma.

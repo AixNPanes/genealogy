@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="gedcom55">
+		<xs:annotation>
+			<xs:documentation>
+				 GEDCOM 6.0 DTD 
+	     		 30 December, 2002
+    
+			     Sample minimal GEDCOM 6.0 XML file:
+				(? xml version="1.0" encoding="UTF-8" ?)
+				(!DOCTYPE GEDCOM SYSTEM "GEDCOM55.dtd")
+				(GEDCOM55)
+				( HeaderRec)
+				(FileCreation Date="")(/FileCreation)
+				(Submitter)
+				(Link Target="" Ref="")(/Link)
+				(/Submitter)
+				(/HeaderRec)
+				(IndividualRec Id="testID")
+				(/IndividualRec)
+				(/GEDCOM55)
+			     (Remove extra spaces from xml and HeaderRec tags,
+			     added here to allow display in a browser.)
+
+			     GEDCOM 6.0 spec is available at http://www.familysearch.org/GEDCOM/GedXML60.pdf
+ 
+				 GEDCOM55 root 
+
+				<!--
+				0 <<HEADER>>															{1:1}
+				0 <<SUBMISSION_RECORD>>													{0:1}
+				0 <<RECORD>>															{1:M}
+				0 TRLR																	{1:1}
+				 --> 
+
+				<!--
+				RECORD:= 
+				[ 
+				n <<FAM_RECORD>>														{1:1} 
+				| 
+				n <<INDIVIDUAL_RECORD>>													{1:1} 
+				| 
+				n <<MULTIMEDIA_RECORD>>													{1:M} 
+				| 
+				n <<NOTE_RECORD>>														{1:1} 
+				| 
+				n <<REPOSITORY_RECORD>>													{1:1} 
+				| 
+				n <<SOURCE_RECORD>>														{1:1} 
+				|
+				n <<SUBMITTER_RECORD>>													{1:1} 
+				]
+				 --> 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="wild">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string" use="optional"/>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:element name="HEADRecord" type="wild"/>
+	<xs:element name="SUBNRecord" type="wild"/>
+	<xs:element name="INDIRecord" type="wild"/>
+	<xs:element name="FAMRecord" type="wild"/>
+	<xs:element name="OBJERecord" type="wild"/>
+	<xs:element name="NOTERecord" type="wild"/>
+	<xs:element name="REPORecord" type="wild"/>
+	<xs:element name="SOURRecord" type="wild"/>
+	<xs:element name="SUBMRecord" type="wild"/>
+	<xs:element name="PLACRecord" type="wild"/>
+	<xs:element name="TRLRRecord" type="wild"/>
+	<xs:element name="OBJE" type="wild"/>
+	<xs:element name="NOTE" type="wild"/>
+	<xs:element name="REPO" type="wild"/>
+	<xs:element name="SOUR" type="wild"/>
+	<xs:element name="SUBM" type="wild"/>
+	<xs:element name="DATA" type="wild"/>
+	<xs:element name="SEX" type="wild"/>
+	<xs:element name="ALIA" type="wild"/>
+	<xs:element name="HUSB" type="wild"/>
+	<xs:element name="WIFE" type="wild"/>
+	<xs:element name="CHIL" type="wild"/>
+	<xs:element name="MARR" type="wild"/>
+	<xs:element name="MARB" type="wild"/>
+	<xs:element name="MARL" type="wild"/>
+	<xs:element name="MARS" type="wild"/>
+	<xs:element name="CONC" type="wild"/>
+	<xs:element name="CONT" type="wild"/>
+	<xs:element name="VERS" type="wild"/>
+	<xs:element name="CORP" type="wild"/>
+	<xs:element name="COPR" type="wild"/>
+	<xs:element name="DEST" type="wild"/>
+	<xs:element name="DATE" type="wild"/>
+	<xs:element name="CHAR" type="wild"/>
+	<xs:element name="FILE" type="wild"/>
+	<xs:element name="GEDC" type="wild"/>
+	<xs:element name="REFN" type="wild"/>
+	<xs:element name="FORM" type="wild"/>
+	<xs:element name="TEXT" type="wild"/>
+	<xs:element name="PAGE" type="wild"/>
+	<xs:element name="_MILT" type="wild"/>
+	<xs:element name="_FREL" type="wild"/>
+	<xs:element name="_MREL" type="wild"/>
+	<xs:element name="_FOOT" type="wild"/>
+	<xs:element name="QUAY" type="wild"/>
+	<xs:element name="NAME" type="wild"/>
+	<xs:element name="ADDR" type="wild"/>
+	<xs:element name="ADR1" type="wild"/>
+	<xs:element name="CITY" type="wild"/>
+	<xs:element name="STAE" type="wild"/>
+	<xs:element name="POST" type="wild"/>
+	<xs:element name="CTRY" type="wild"/>
+	<xs:element name="EMAIL" type="wild"/>
+	<xs:element name="PHON" type="wild"/>
+	<xs:element name="RESI" type="wild"/>
+	<xs:element name="BIRT" type="wild"/>
+	<xs:element name="TITL" type="wild"/>
+	<xs:element name="FAMS" type="wild"/>
+	<xs:element name="FAMC" type="wild"/>
+	<xs:element name="CALN" type="wild"/>
+	<xs:element name="PUBL" type="wild"/>
+	<xs:element name="PLAC" type="wild"/>
+	<xs:element name="AUTH" type="wild"/>
+	<xs:element name="DEAT" type="wild"/>
+	<xs:element name="OCCU" type="wild"/>
+	<xs:element name="EVEN" type="wild"/>
+	<xs:element name="TYPE" type="wild"/>
+	<xs:element name="BAPL" type="wild"/>
+	<xs:element name="SSN" type="wild"/>
+	<xs:element name="ADOP" type="wild"/>
+	<xs:element name="CHR" type="wild"/>
+	<xs:element name="BURI" type="wild"/>
+	<xs:element name="ENDL" type="wild"/>
+	<xs:element name="SLGC" type="wild"/>
+	<xs:element name="BLES" type="wild"/>
+</xs:schema>

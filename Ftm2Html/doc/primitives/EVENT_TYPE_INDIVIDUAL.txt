@@ -1,0 +1,8 @@
+EVENT_TYPE_INDIVIDUAL:=	{Size=3:4} 
+[ ADOP | BIRT | BAPM | BARM | BASM | BLES | BURI | CENS | CHR | CHRA | CONF 
+| CREM | DEAT | EMIG | FCOM | GRAD | IMMI | NATU | ORDN | RETI | PROB | WILL 
+| EVEN ]
+
+A code used to indicate the type of family event.  The definition is the same 
+as the corresponding event tag defined in Appendix A. (See Appendix A, starting 
+on page 71).

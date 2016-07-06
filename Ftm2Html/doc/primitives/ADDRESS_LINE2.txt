@@ -1,0 +1,5 @@
+ADDRESS_LINE2:=	{Size=1:60} 
+
+The second line of the address used for indexing.  This corresponds to the 
+ADDRESS_LINE value of the first CONT line subordinate to the ADDR tag in the 
+address structure.

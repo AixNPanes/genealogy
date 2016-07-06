@@ -1,0 +1,18 @@
+SUBMISSION_RECORD:=
+
+n @XREF:SUBN@ SUBN														{1:1] 
+	+1 SUBM @XREF:SUBM@													{0:1} 
+	+1 FAMF <NAME_OF_FAMILY_FILE>										{0:1} 
+	+1 TEMP <TEMPLE_CODE>												{0:1} 
+	+1 ANCE <GENERATIONS_OF_ANCESTORS>									{0:1} 
+	+1 DESC <GENERATIONS_OF_DESCENDANTS>								{0:1} 
+	+1 ORDI <ORDINANCE_PROCESS_FLAG>									{0:1} 
+	+1 RIN <AUTOMATED_RECORD_ID>										{0:1}
+
+The sending system uses a submission record to send instructions and 
+information to the receiving system. TempleReady processes submission records 
+to determine which temple the cleared records should be directed to. The 
+submission record is also used for communication between Ancestral File 
+download requests and TempleReady. Each GEDCOM transmission file should have 
+only one submission record. Multiple submissions are handled by creating 
+separate GEDCOM transmission files.

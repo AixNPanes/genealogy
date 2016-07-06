@@ -1,0 +1,3 @@
+SCHOLASTIC_ACHIEVEMENT:=	{Size=1:248} 
+
+A description of a scholastic or educational achievement or pursuit.

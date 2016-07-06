@@ -1,0 +1,3 @@
+ADDRESS_STATE:=	{Size=1:60} 
+
+The name of the state used in the address. Isolated for sorting or indexing.

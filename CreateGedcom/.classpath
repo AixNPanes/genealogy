@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="dist/lib/gedcom.jar" sourcepath="gen-src"/>
+	<classpathentry kind="lib" path="lib/jaxb-impl.jar" sourcepath="C:/Download/Sun/jwsp/jaxb-ri-20060426"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxb/lib/jaxb1-impl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxb/lib/jaxb-api.jar" sourcepath="C:/Download/Sun/jwsp/jaxb-ri-20060426"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxb/lib/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxb/lib/jaxb-xjc.jar" sourcepath="C:/Download/Sun/jwsp/jaxb-ri-20060426"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/jaxp-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/endorsed/dom.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/endorsed/jaxp-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/endorsed/sax.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/endorsed/xalan.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxp/lib/endorsed/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxr/lib/jaxr-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxr/lib/jaxr-impl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxrpc/lib/jaxrpc-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxrpc/lib/jaxrpc-impl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxrpc/lib/jaxrpc-spi.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxws/lib/jaxws-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxws/lib/jaxws-rt.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxws/lib/jaxws-tools.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxws/lib/jsr181-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jaxws/lib/jsr250-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/activation.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/jaas.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/jta-spec1_0_1.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/mail.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/relaxngDatatype.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/resolver.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/xmlsec.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/jwsdp-shared/lib/xsdlib.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/saaj/lib/saaj-api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/saaj/lib/saaj-impl.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/sjsxp/lib/jsr173_api.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/sjsxp/lib/sjsxp.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xmldsig/lib/xmldsig.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/keyexport.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/pkcs12import.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/security-plugin.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/wss-provider-update.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/xws-security.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/xws-security/lib/xws-security_jaxrpc.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/apache-ant/lib/ant.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/apache-ant/lib/ant-junit.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/apache-ant/lib/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/apache-ant/lib/ant-nodeps.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/apache-ant/lib/ant-trax.jar"/>
+	<classpathentry kind="lib" path="C:/jwsdp-2.0/fastinfoset/lib/FastInfoset.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

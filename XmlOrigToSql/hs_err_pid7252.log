@@ -1,0 +1,135 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+# java.lang.OutOfMemoryError: requested 32756 bytes for ChunkPool::allocate. Out of swap space?
+#
+#  Internal Error (allocation.cpp:120), pid=7252, tid=596
+#  Error: ChunkPool::allocate
+#
+# Java VM: Java HotSpot(TM) Client VM (11.0-b15 mixed mode windows-x86)
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x01acb400):  JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=596, stack(0x6fa40000,0x71240000)]
+
+Stack: [0x6fa40000,0x71240000]
+
+[error occurred during error reporting (printing native stack), id 0xc0000005]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x6f5e3800 JavaThread "MySQL Statement Cancellation Timer" daemon [_thread_blocked, id=7220, stack(0x7c3a0000,0x7dba0000)]
+  0x01adb800 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=7916, stack(0x79710000,0x7af10000)]
+  0x01ad8400 JavaThread "CompilerThread0" daemon [_thread_blocked, id=1336, stack(0x01b60000,0x01bb0000)]
+  0x01accc00 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=6528, stack(0x77f10000,0x79710000)]
+  0x01acc400 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=6904, stack(0x72dc0000,0x745c0000)]
+=>0x01acb400 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=596, stack(0x6fa40000,0x71240000)]
+  0x01abfc00 JavaThread "Attach Listener" daemon [_thread_blocked, id=7460, stack(0x6db10000,0x6f310000)]
+  0x01ab5400 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3520, stack(0x6abd0000,0x6c3d0000)]
+  0x01aa3800 JavaThread "Finalizer" daemon [_thread_blocked, id=6944, stack(0x693d0000,0x6abd0000)]
+  0x01a9ec00 JavaThread "Reference Handler" daemon [_thread_blocked, id=4256, stack(0x67bd0000,0x693d0000)]
+  0x003db400 JavaThread "main" [_thread_in_Java, id=7128, stack(0x02200000,0x03a00000)]
+
+Other Threads:
+  0x01a9b000 VMThread [stack: 0x01b10000,0x01b60000] [id=4500]
+  0x01ae4c00 WatcherThread [stack: 0x6c3d0000,0x6c420000] [id=5484]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 36352K, used 763K [0x05a00000, 0x08170000, 0x0cd60000)
+  eden space 32320K,   2% used [0x05a00000, 0x05abee60, 0x07990000)
+  from space 4032K,   0% used [0x07990000, 0x07990000, 0x07d80000)
+  to   space 4032K,   0% used [0x07d80000, 0x07d80000, 0x08170000)
+ tenured generation   total 483968K, used 17272K [0x0cd60000, 0x2a600000, 0x63600000)
+   the space 483968K,   3% used [0x0cd60000, 0x0de3e130, 0x0de3e200, 0x2a600000)
+ compacting perm gen  total 16640K, used 16486K [0x63600000, 0x64640000, 0x67600000)
+   the space 16640K,  99% used [0x63600000, 0x64619870, 0x64619a00, 0x64640000)
+No shared spaces configured.
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\jdk1.6.0_10\jre\bin\javaw.exe
+0x77d30000 - 0x77e57000 	C:\Windows\system32\ntdll.dll
+0x77010000 - 0x770eb000 	C:\Windows\system32\kernel32.dll
+0x77c60000 - 0x77d26000 	C:\Windows\system32\ADVAPI32.dll
+0x76680000 - 0x76742000 	C:\Windows\system32\RPCRT4.dll
+0x76da0000 - 0x76e3d000 	C:\Windows\system32\USER32.dll
+0x76ed0000 - 0x76f1b000 	C:\Windows\system32\GDI32.dll
+0x77e70000 - 0x77e8e000 	C:\Windows\system32\IMM32.DLL
+0x76420000 - 0x764e8000 	C:\Windows\system32\MSCTF.dll
+0x76750000 - 0x767fa000 	C:\Windows\system32\msvcrt.dll
+0x77e60000 - 0x77e69000 	C:\Windows\system32\LPK.DLL
+0x77e90000 - 0x77f0d000 	C:\Windows\system32\USP10.dll
+0x6fa00000 - 0x6fa3e000 	C:\PROGRA~1\Sophos\SOPHOS~1\SOPHOS~1.DLL
+0x76340000 - 0x76347000 	C:\Windows\system32\PSAPI.DLL
+0x7c340000 - 0x7c396000 	C:\jdk1.6.0_10\jre\bin\msvcr71.dll
+0x6d8b0000 - 0x6db06000 	C:\jdk1.6.0_10\jre\bin\client\jvm.dll
+0x74800000 - 0x74832000 	C:\Windows\system32\WINMM.dll
+0x76c40000 - 0x76d84000 	C:\Windows\system32\ole32.dll
+0x76a70000 - 0x76afd000 	C:\Windows\system32\OLEAUT32.dll
+0x747c0000 - 0x747f9000 	C:\Windows\system32\OLEACC.dll
+0x76210000 - 0x7623c000 	C:\Windows\system32\apphelp.dll
+0x6d330000 - 0x6d338000 	C:\jdk1.6.0_10\jre\bin\hpi.dll
+0x6d420000 - 0x6d449000 	C:\jdk1.6.0_10\jre\bin\jdwp.dll
+0x6d750000 - 0x6d756000 	C:\jdk1.6.0_10\jre\bin\npt.dll
+0x6d860000 - 0x6d86c000 	C:\jdk1.6.0_10\jre\bin\verify.dll
+0x6d3d0000 - 0x6d3ef000 	C:\jdk1.6.0_10\jre\bin\java.dll
+0x6d8a0000 - 0x6d8af000 	C:\jdk1.6.0_10\jre\bin\zip.dll
+0x6d2a0000 - 0x6d2a7000 	C:\jdk1.6.0_10\jre\bin\dt_socket.dll
+0x763e0000 - 0x7640d000 	C:\Windows\system32\WS2_32.dll
+0x76410000 - 0x76416000 	C:\Windows\system32\NSI.dll
+0x74740000 - 0x7474f000 	C:\Windows\system32\NLAapi.dll
+0x75c80000 - 0x75c99000 	C:\Windows\system32\IPHLPAPI.DLL
+0x75c40000 - 0x75c75000 	C:\Windows\system32\dhcpcsvc.DLL
+0x75ed0000 - 0x75efc000 	C:\Windows\system32\DNSAPI.dll
+0x76270000 - 0x76284000 	C:\Windows\system32\Secur32.dll
+0x75c30000 - 0x75c37000 	C:\Windows\system32\WINNSI.DLL
+0x75c00000 - 0x75c21000 	C:\Windows\system32\dhcpcsvc6.DLL
+0x72db0000 - 0x72dbf000 	C:\Windows\system32\napinsp.dll
+0x723f0000 - 0x72402000 	C:\Windows\system32\pnrpnsp.dll
+0x75a30000 - 0x75a6b000 	C:\Windows\System32\mswsock.dll
+0x72500000 - 0x72508000 	C:\Windows\System32\winrnr.dll
+0x769f0000 - 0x76a3a000 	C:\Windows\system32\WLDAP32.dll
+0x007e0000 - 0x00805000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x72420000 - 0x7242c000 	C:\Windows\system32\wshbth.dll
+0x764f0000 - 0x7667a000 	C:\Windows\system32\SETUPAPI.dll
+0x727d0000 - 0x727d6000 	C:\Windows\system32\rasadhlp.dll
+0x75510000 - 0x75515000 	C:\Windows\System32\wshtcpip.dll
+0x6d6c0000 - 0x6d6d3000 	C:\jdk1.6.0_10\jre\bin\net.dll
+0x75a90000 - 0x75a95000 	C:\Windows\System32\wship6.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:51147 -Xms512m -Xmx1500m -Xss24m -Dfile.encoding=Cp1252 
+java_command: ws.daley.genealogy.XmlOrigToSQL
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=c:\jdk1.6.0_10
+CLASSPATH=.;C:\jre6\lib\ext\QTJava.zip
+PATH=C:/jre6/bin/client;C:/jre6/bin;C:\Perl\site\bin;C:\Perl\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\Windows Imaging\;C:\Program Files\Gemplus\GemSafe Libraries\BIN;C:\Program Files\WinSCPPlus\;C:\Program Files\OpenSSH\bin;C:\Windows\System32\Windows System Resource Manager\bin;C:\Windows\idmu\common;C:\EclipseProjects\Apache\Maven-2.0.9\apache-maven-2.0.9\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\System Center Operations Manager 2007\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Microsoft SQL Server\80\Tools\Binn\;C:\Program Files\Microsoft SQL Server\90\Tools\binn\;C:\Program Files\Microsoft SQL Server\90\DTS\Binn\;C:\Program Files\Microsoft SQL Server\90\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files\Microsoft Visual Studio 8\Common7\IDE\PrivateAssemblies\;C:\Program Files\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;C:\Program Files\Wave Systems Corp\Gemalto\Access Client\v5\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\MySQL\MySQL Server 5.1\bin;C:\Program Files\OpenSSH\bin;C:\jdk1.6.0_10\jre\bin;C:\Windows\system32\WindowsPowerShell\v1.0\;C:\Program Files\VMware\Infrastructure\vSphere PowerCLI\Scripts;C:\Program Files\Common Files\Roxio Shared\DLLShared\;C:\Program Files\Common Files\Roxio Shared\10.0\DLLShared\;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Pinnacle\Shared Files;C:\Program Files\Pinnacle\Shared Files\Filter
+USERNAME=Tim.Daley
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows Vista Build 6001 Service Pack 1
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 15 stepping 6, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 2097151k(606592k free), swap 4194303k(2609596k free)
+
+vm_info: Java HotSpot(TM) Client VM (11.0-b15) for windows-x86 JRE (1.6.0_10-rc-b28), built on Jul 21 2008 00:52:03 by "java_re" with MS VC++ 7.1
+
+time: Wed Feb 03 20:40:33 2010
+elapsed time: 202 seconds
+

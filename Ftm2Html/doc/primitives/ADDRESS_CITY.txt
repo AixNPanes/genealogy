@@ -1,0 +1,3 @@
+ADDRESS_CITY:=	{Size=1:60} 
+
+The name of the city used in the address. Isolated for sorting or indexing.

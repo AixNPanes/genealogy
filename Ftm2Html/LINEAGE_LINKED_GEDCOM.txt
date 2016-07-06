@@ -1,0 +1,12 @@
+LINEAGE_LINKED_GEDCOM:=
+This is a model of the lineage-linked GEDCOM structure for submitting data to
+other lineage-linked GEDCOM processing systems. A header and a trailer record 
+are required, and they can enclose any number of data records. Tags from
+Appendix A (see page 71) must be used in the same context as shown in the
+following form. User defined tags (see <NEW_TAG> on page 52) are discouraged
+but when used must begin with an under-score. 
+0 <<HEADER>>															{1:1}
+0 <<SUBMISSION_RECORD>>													{0:1}
+0 <<RECORD>>															{1:M}
+0 TRLR																	{1:1}
+

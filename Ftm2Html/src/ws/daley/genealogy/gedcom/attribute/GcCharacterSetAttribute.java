@@ -1,0 +1,29 @@
+package ws.daley.genealogy.gedcom.attribute;
+
+
+/**
+ * CHARACTER_SET:=	{Size=1:8}
+ * [ ANSEL | UNICODE | ASCII ] 
+ * 
+ * A code value that represents the character set to be used to interpret 
+ * this data. The default character set is ANSEL, which includes ASCII as a 
+ * subset. UNICODE is not widely supported by most operating systems; therefore, 
+ * GEDCOM produced using the UNICODE character set will be limited in acceptance 
+ * for some time. See Chapter 3, starting on page 65. ASCII contains the character 
+ * set from 0x0 to 0xFF.
+ * 
+ * Note:The IBMPC character set is not allowed. This character set cannot be 
+ * interpreted properly without knowing which code page the sender was using.
+ */
+
+public class GcCharacterSetAttribute extends Gc_Attribute
+{
+	public static AttributeDescriptorMap map = new AttributeDescriptorMap();
+	
+	static{
+		map = AttributeDescriptorMap.newFromArray(new AttributeDescriptor[]{
+				new AttributeDescriptor("CHARACTER_SET", 1, 8, GcCharacterSetAttribute.class),
+		});
+	}
+
+}

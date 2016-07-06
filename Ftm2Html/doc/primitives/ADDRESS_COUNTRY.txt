@@ -1,0 +1,5 @@
+ADDRESS_COUNTRY:=	{Size=1:60} 
+
+The name of the country that pertains to the associated address. Isolated by 
+some systems for sorting or indexing. Used in most cases to facilitate 
+automatic sorting of mail.

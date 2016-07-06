@@ -1,0 +1,7 @@
+GEDCOM_FORM:=	{Size=14:20} 
+[ LINEAGE-LINKED ] 
+
+The GEDCOM form used to construct this transmission. There maybe other forms 
+used such as CommSoft's "EVENT_LINEAGE_LINKED" but these specifications define 
+only the LINEAGELINKED Form.  Systems will use this value to specify GEDCOM 
+compatible with these specifications.

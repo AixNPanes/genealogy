@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<project>
+	<property name="jaxb.home" value="C:/Download/Sun/jaxb/jaxb-ri-20070122"/>
+	<property name="jaxb.lib" value="${jaxb.home}/lib"/>
+	<property name="jaxb.bin" value="${jaxb.home}/bin"/>
+	<property name="data.dir" value="data"/>
+	
+	<property name="gedcom60.xml" value="${data.dir}/gedcom60.xml" />
+	<property name="gedcom60.xsd" value="${data.dir}/gedcom60.xsd" />
+	<property name="books.xsd" value="${data.dir}/books.xsd" />
+	<property name="classes" value="classes" />
+	<property name="src" value="src"/>
+	<property name="gedcom.jar" value="lib/gedcom.jar"/>
+
+	<path id="classpath">
+		<fileset dir="${jaxb.lib}" includes="*.jar" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+		<pathelement location="${classes}"/>
+		<pathelement location="${gedcom.jar}"/>
+	</path>
+	
+	<target name="xjc-gedcom">
+		<java jar="${jaxb.lib}/jaxb-xjc.jar" fork="Yes">
+			<arg value="-p"/>
+			<arg value="ws.daley.gedcom"/>
+			<arg value="${gedcom60.xsd}"/>
+			<arg value="-d"/>
+			<arg value="src"/>
+		</java>
+	</target>
+	
+	<target name="xjc-books">
+		<java jar="${jaxb.lib}/jaxb-xjc.jar" fork="Yes">
+			<arg value="-p"/>
+			<arg value="books"/>
+			<arg value="${books.xsd}"/>
+			<arg value="-d"/>
+			<arg value="classes-books"/>
+		</java>
+	</target>
+
+	<target name="build">
+		<mkdir dir="${classes}"/>
+		<echo message="Current working directory: ${basedir}"/>
+		<javac destdir="${classes}" debug="on">
+			<classpath refid="classpath" />
+			<src path="${src}"/>
+		</javac>
+	</target>
+
+	<target name="gedcom60-xml" depends="build">
+		<echo message="Running CreateGedcomExample..." />
+		<mkdir dir="${data.dir}" />
+		<echo message="Current working directory: ${basedir}"/>
+		<java classname="example.CreateGedcomExample">
+			<classpath refid="classpath" />
+			<sysproperty key="output.filename" value="${gedcom60.xml}"/>
+		</java>
+	</target>
+
+	<target name="gedcom55-txt" depends="gedcom60-xml">
+		<ant antfile="stylesheets/build.xml" target="gedcom55-txt"/>
+	</target>
+
+	<target name="clean" description="Deletes all the generated artifacts.">
+		<delete file="${gedcom60.xml}" failonerror="false" />
+	</target>
+</project>

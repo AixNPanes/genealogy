@@ -1,0 +1,16 @@
+RECORD:= 
+[ 
+n <<FAM_RECORD>>														{1:1} 
+| 
+n <<INDIVIDUAL_RECORD>>													{1:1} 
+| 
+n <<MULTIMEDIA_RECORD>>													{1:M} 
+| 
+n <<NOTE_RECORD>>														{1:1} 
+| 
+n <<REPOSITORY_RECORD>>													{1:1} 
+| 
+n <<SOURCE_RECORD>>														{1:1} 
+|
+n <<SUBMITTER_RECORD>>													{1:1} 
+]
