@@ -54,7 +54,7 @@ public class MyFamilyFile
 		try {inputStreamReader = new InputStreamReader(inputStream, MyFamilyState.UTF8);}
 		catch(UnsupportedEncodingException e) {throw new RuntimeException(e);}
 		Gson gson = new GsonBuilder().create();
-		return gson.fromJson(inputStreamReader, MyFamilyState.class);
+		return gson.fromJson(inputStreamReader, MyFamilyFile.class);
 	}
 
 	public static MyFamilyFile getJson(File file)
@@ -73,7 +73,7 @@ public class MyFamilyFile
 		try {inputStreamReader = new InputStreamReader(inputStream, MyFamilyState.UTF8);}
 		catch(UnsupportedEncodingException e) {throw new RuntimeException(e);}
 		Gson gson = new GsonBuilder().create();
-		return gson.fromJson(inputStreamReader, MyFamilyState.class);
+		return gson.fromJson(inputStreamReader, MyFamilyFile.class);
 	}
 
 	public static MyFamilyFile getGEDCOM(File file)

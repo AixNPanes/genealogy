@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
-import org.eclipse.persistence.jpa.osgi.PersistenceProvider;
+import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
